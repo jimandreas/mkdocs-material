@@ -10,7 +10,7 @@ Before you do, please read the following guidelines.
 For quick questions there's no need to open an issue as you can reach us on
 [gitter.im][1].
 
-  [1]: https://gitter.im/squidfunk/mkdocs-material
+  [1]: https://gitter.im/jimandreas/mkdocs-material
 
 ### Found a bug?
 
@@ -19,7 +19,7 @@ to the [issue tracker][2] in our GitHub repository. Even better, you can submit
 a Pull Request with a fix. However, before doing so, please read the
 [submission guidelines][3].
 
-  [2]: https://github.com/squidfunk/mkdocs-material/issues
+  [2]: https://github.com/jimandreas/mkdocs-material/issues
   [3]: #submission-guidelines
 
 ### Missing a feature?
@@ -78,5 +78,5 @@ go ahead.
 After your PR is merged, you can safely delete your branch and pull the changes
 from the main (upstream) repository.
 
-  [4]: https://squidfunk.github.io/mkdocs-material/customization/#environment-setup
-  [5]: https://squidfunk.github.io/mkdocs-material/customization/#build-process
+  [4]: https://jimandreas.github.io/mkdocs-material/customization/#environment-setup
+  [5]: https://jimandreas.github.io/mkdocs-material/customization/#build-process

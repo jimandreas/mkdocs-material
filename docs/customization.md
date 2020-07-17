@@ -193,8 +193,8 @@ the source of the theme and recompile it.
 In order to start development on Material for MkDocs, a [Node.js][9] version of
 at least 12 is required. First, clone the repository:
 
-```
-git clone https://github.com/squidfunk/mkdocs-material
+``` sh
+git clone https://github.com/jimandreas/mkdocs-material
 ```
 
 Next, all dependencies need to be installed, which is done with:

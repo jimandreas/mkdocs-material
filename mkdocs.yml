@@ -1,4 +1,4 @@
-# Copyright (c) 2016-2020 Martin Donath <martin.donath@squidfunk.com>
+# Copyright (c) 2016-2020 Martin Donath <martin.donath@jimandreas.com>
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to
@@ -20,7 +20,7 @@
 
 # Project information
 site_name: Material for MkDocs
-site_url: https://squidfunk.github.io/mkdocs-material/
+site_url: https://jimandreas.github.io/mkdocs-material/
 site_author: Martin Donath
 site_description: >-
   Create a branded static site from a set of Markdown files to host the
@@ -28,8 +28,8 @@ site_description: >-
   searchable, mobile-friendly, 40+ languages
 
 # Repository
-repo_name: squidfunk/mkdocs-material
-repo_url: https://github.com/squidfunk/mkdocs-material
+repo_name: jimandreas/mkdocs-material
+repo_url: https://github.com/jimandreas/mkdocs-material
 edit_uri: ""
 
 # Copyright
@@ -90,17 +90,17 @@ plugins:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/squidfunk
+      link: https://github.com/jimandreas
     - icon: fontawesome/brands/gitter
-      link: https://gitter.im/squidfunk/mkdocs-material
+      link: https://gitter.im/jimandreas/mkdocs-material
     - icon: fontawesome/brands/docker
-      link: https://hub.docker.com/r/squidfunk/mkdocs-material/
+      link: https://hub.docker.com/r/jimandreas/mkdocs-material/
     - icon: fontawesome/brands/twitter
-      link: https://twitter.com/squidfunk
+      link: https://twitter.com/jimandreas
     - icon: fontawesome/brands/linkedin
-      link: https://linkedin.com/in/squidfunk/
+      link: https://linkedin.com/in/jimandreas/
     - icon: fontawesome/brands/instagram
-      link: https://instagram.com/squidfunk
+      link: https://instagram.com/jimandreas
 
 # Extensions
 markdown_extensions:
@@ -126,7 +126,7 @@ markdown_extensions:
   - pymdownx.keys
   - pymdownx.magiclink:
       repo_url_shorthand: true
-      user: squidfunk
+      user: jimandreas
       repo: mkdocs-material
   - pymdownx.mark
   - pymdownx.smartsymbols

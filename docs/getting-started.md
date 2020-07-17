@@ -58,7 +58,7 @@ minutes, as it comes with all dependencies pre-installed. Pull the image for the
 `latest` version with:
 
 ```
-docker pull squidfunk/mkdocs-material
+docker pull jimandreas/mkdocs-material
 ```
 
 The `mkdocs` executable is provided as an entry point and `serve` is the 
