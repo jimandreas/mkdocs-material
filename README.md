@@ -1,6 +1,6 @@
 <p align="center">
-  <a href="https://squidfunk.github.io/mkdocs-material">
-    <img src="https://raw.githubusercontent.com/squidfunk/mkdocs-material/master/.github/assets/logo.png" width="320" alt="Material for MkDocs">
+  <a href="https://jimandreas.github.io/mkdocs-material">
+    <img src="https://raw.githubusercontent.com/jimandreas/mkdocs-material/master/.github/assets/logo.png" width="320" alt="Material for MkDocs">
   </a>
 </p>
 
@@ -14,27 +14,27 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/squidfunk/mkdocs-material/actions"><img
-    src="https://github.com/squidfunk/mkdocs-material/workflows/ci/badge.svg?branch=master"
+  <a href="https://github.com/jimandreas/mkdocs-material/actions"><img
+    src="https://github.com/jimandreas/mkdocs-material/workflows/ci/badge.svg?branch=master"
     alt="GitHub Action"
   /></a>
   <a href="https://pypistats.org/packages/mkdocs-material"><img
     src="https://img.shields.io/pypi/dm/mkdocs-material.svg" 
     alt="Downloads"
   /></a>
-  <a href="https://gitter.im/squidfunk/mkdocs-material"><img 
-    src="https://badges.gitter.im/squidfunk/mkdocs-material.svg" 
+  <a href="https://gitter.im/jimandreas/mkdocs-material"><img 
+    src="https://badges.gitter.im/jimandreas/mkdocs-material.svg" 
     alt="Chat on Gitter"
   /></a>
   <a href="https://pypi.org/project/mkdocs-material"><img 
     src="https://img.shields.io/pypi/v/mkdocs-material.svg" 
     alt="Python Package Index"
   /></a>
-  <a href="https://hub.docker.com/r/squidfunk/mkdocs-material/"><img 
-    src="https://img.shields.io/docker/pulls/squidfunk/mkdocs-material" 
+  <a href="https://hub.docker.com/r/jimandreas/mkdocs-material/"><img 
+    src="https://img.shields.io/docker/pulls/jimandreas/mkdocs-material" 
     alt="Docker Pulls"
   /></a>
-  <a href="https://github.com/sponsors/squidfunk"><img
+  <a href="https://github.com/sponsors/jimandreas"><img
     src="https://img.shields.io/static/v1?label=sponsor&message=%E2%9D%A4&logo=GitHub&color=ea4aaa"
   /></a>
 </p>
@@ -46,8 +46,8 @@
 </p>
 
 <p align="center">
-  <a href="https://squidfunk.github.io/mkdocs-material/getting-started/">
-    <img src="https://raw.githubusercontent.com/squidfunk/mkdocs-material/master/.github/assets/screenshot.png" width="700" />
+  <a href="https://jimandreas.github.io/mkdocs-material/getting-started/">
+    <img src="https://raw.githubusercontent.com/jimandreas/mkdocs-material/master/.github/assets/screenshot.png" width="700" />
   </a>
 </p>
 
@@ -55,8 +55,8 @@
   <em>
     A demo is worth a thousand words — check it out at
     <a
-      href="https://squidfunk.github.io/mkdocs-material/"
-    >squidfunk.github.io/mkdocs-material</a>.
+      href="https://jimandreas.github.io/mkdocs-material/"
+    >jimandreas.github.io/mkdocs-material</a>.
   </em>
 </p>
 
@@ -113,9 +113,9 @@ theme:
 ```
 
 For other installation methods, configuration options, and a demo, visit
-[squidfunk.github.io/mkdocs-material][1]
+[jimandreas.github.io/mkdocs-material][1]
 
-  [1]: https://squidfunk.github.io/mkdocs-material/
+  [1]: https://jimandreas.github.io/mkdocs-material/
 
 ## Users
 
@@ -148,7 +148,7 @@ For other installation methods, configuration options, and a demo, visit
 
 <p>
   <a href="https://cirrus-ci.org/" target=_blank>
-    <img src="https://raw.githubusercontent.com/squidfunk/mkdocs-material/master/.github/assets/sponsors/cirrus-ci.svg" width="155" />
+    <img src="https://raw.githubusercontent.com/jimandreas/mkdocs-material/master/.github/assets/sponsors/cirrus-ci.svg" width="155" />
   </a>
 </p>
 
@@ -156,7 +156,7 @@ If you're using this project a lot, consider [sponsoring][2] it! This will give
 me the opportunity to sustain my efforts maintaining it. Every contribution
 counts, no matter how small!
 
-  [2]: https://github.com/sponsors/squidfunk
+  [2]: https://github.com/sponsors/jimandreas
 
 ## License
 

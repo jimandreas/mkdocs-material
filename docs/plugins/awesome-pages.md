@@ -15,7 +15,7 @@ and order on a directory level.
     the [getting started guide][3] to get up and running with Docker.
 
   [1]: https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin/
-  [2]: https://hub.docker.com/r/squidfunk/mkdocs-material/
+  [2]: https://hub.docker.com/r/jimandreas/mkdocs-material/
   [3]: ../getting-started.md#with-docker-recommended
 
 ## Installation

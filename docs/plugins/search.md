@@ -13,7 +13,7 @@ language by default, while stemmers for other languages are included with
 
     While search will not work for the `file://` protocol, as web workers and
     the use of `XMLHTTPRequest` are both blocked by modern browsers for security
-    reasons, the [localsearch][4] plugin and @squidfunk's [iframe-worker][5]
+    reasons, the [localsearch][4] plugin and @jimandreas's [iframe-worker][5]
     polyfill add support for cases where this is a mandatory requirement, e.g.,
     for offline use.
 
@@ -21,7 +21,7 @@ language by default, while stemmers for other languages are included with
   [2]: https://lunrjs.com
   [3]: https://github.com/MihaiValentin/lunr-languages
   [4]: https://github.com/wilhelmer/mkdocs-localsearch
-  [5]: https://github.com/squidfunk/iframe-worker
+  [5]: https://github.com/jimandreas/iframe-worker
 
 ## Installation
 

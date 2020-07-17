@@ -712,9 +712,9 @@ module.exports = _extends(exports['default'], exports);
   "name": "mkdocs-material",
   "version": "0.2.4",
   "description": "A Material Design theme for MkDocs",
-  "homepage": "http://squidfunk.github.io/mkdocs-material/",
+  "homepage": "http://jimandreas.github.io/mkdocs-material/",
   "authors": [
-    "squidfunk <martin.donath@squidfunk.com>"
+    "jimandreas <martin.donath@jimandreas.com>"
   ],
   "license": "MIT",
   "main": "Gulpfile.js",

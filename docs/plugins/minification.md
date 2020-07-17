@@ -15,7 +15,7 @@ to reduce the payload served to the client.
     the [getting started guide][3] to get up and running with Docker.
 
   [1]: https://github.com/byrnereese/mkdocs-minify-plugin
-  [2]: https://hub.docker.com/r/squidfunk/mkdocs-material/
+  [2]: https://hub.docker.com/r/jimandreas/mkdocs-material/
   [3]: ../getting-started.md#with-docker-recommended
 
 ## Installation

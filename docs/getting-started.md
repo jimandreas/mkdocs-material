@@ -10,7 +10,7 @@ While there are several ways of installing Material for MkDocs, the recommended
 methods are either by using `pip` – the Python package manager – or by pulling
 the [official Docker image][1].
 
-  [1]: https://hub.docker.com/r/squidfunk/mkdocs-material/
+  [1]: https://hub.docker.com/r/jimandreas/mkdocs-material/
 
 ### with pip <small>recommended</small>
 
@@ -66,7 +66,7 @@ minutes, as it comes with all dependencies pre-installed. Pull the image for the
 `latest` version with:
 
 ```
-docker pull squidfunk/mkdocs-material
+docker pull jimandreas/mkdocs-material
 ```
 
 The `mkdocs` executable is provided as an entry point and `serve` is the default
@@ -76,16 +76,16 @@ command. Start the development server in your project root – the folder where
 === "Unix"
 
     ```
-    docker run --rm -it -p 8000:8000 -v ${PWD}:/docs squidfunk/mkdocs-material
+    docker run --rm -it -p 8000:8000 -v ${PWD}:/docs jimandreas/mkdocs-material
     ```
 
 === "Windows"
 
     ```
-    docker run --rm -it -p 8000:8000 -v "%cd%":/docs squidfunk/mkdocs-material
+    docker run --rm -it -p 8000:8000 -v "%cd%":/docs jimandreas/mkdocs-material
     ```
 
-  [7]: https://hub.docker.com/r/squidfunk/mkdocs-material/
+  [7]: https://hub.docker.com/r/jimandreas/mkdocs-material/
 
 ### with git
 
@@ -94,12 +94,12 @@ repository into a subfolder of your project root which might be useful if you
 want to use the very latest version:
 
 ``` sh
-git clone https://github.com/squidfunk/mkdocs-material.git
+git clone https://github.com/jimandreas/mkdocs-material.git
 ```
 
 The theme will reside in the folder `mkdocs-material/material`.
 
-  [8]: https://github.com/squidfunk/mkdocs-material
+  [8]: https://github.com/jimandreas/mkdocs-material
 
 ## Configuration
 
@@ -141,11 +141,11 @@ can be used as a starting point:
     site_name: Material for MkDocs
     site_description: A Material Design theme for MkDocs
     site_author: Martin Donath
-    site_url: https://squidfunk.github.io/mkdocs-material/
+    site_url: https://jimandreas.github.io/mkdocs-material/
 
     # Repository
-    repo_name: squidfunk/mkdocs-material
-    repo_url: https://github.com/squidfunk/mkdocs-material
+    repo_name: jimandreas/mkdocs-material
+    repo_url: https://github.com/jimandreas/mkdocs-material
 
     # Copyright
     copyright: Copyright &copy; 2016 - 2020 Martin Donath
@@ -165,11 +165,11 @@ can be used as a starting point:
     extra:
       social:
         - icon: fontawesome/brands/github-alt
-          link: https://github.com/squidfunk
+          link: https://github.com/jimandreas
         - icon: fontawesome/brands/twitter
-          link: https://twitter.com/squidfunk
+          link: https://twitter.com/jimandreas
         - icon: fontawesome/brands/linkedin
-          link: https://linkedin.com/in/squidfunk
+          link: https://linkedin.com/in/jimandreas
 
     # Google Analytics
     google_analytics:
@@ -185,7 +185,7 @@ can be used as a starting point:
           permalink: true
     ```
 
-[9]: https://github.com/squidfunk/mkdocs-material/blob/master/mkdocs.yml
+[9]: https://github.com/jimandreas/mkdocs-material/blob/master/mkdocs.yml
 
 ### Feature flags
 
@@ -635,8 +635,8 @@ To include a link to the repository of your project within your documentation,
 set the following variables via your project's `mkdocs.yml`:
 
 ``` yaml
-repo_name: squidfunk/mkdocs-material
-repo_url: https://github.com/squidfunk/mkdocs-material
+repo_name: jimandreas/mkdocs-material
+repo_url: https://github.com/jimandreas/mkdocs-material
 ```
 
 The name of the repository will be rendered next to the search bar on big
@@ -666,11 +666,11 @@ which comes with the theme:
 extra:
   social:
     - icon: fontawesome/brands/github-alt
-      link: https://github.com/squidfunk
+      link: https://github.com/jimandreas
     - icon: fontawesome/brands/twitter
-      link: https://twitter.com/squidfunk
+      link: https://twitter.com/jimandreas
     - icon: fontawesome/brands/linkedin
-      link: https://linkedin.com/in/squidfunk
+      link: https://linkedin.com/in/jimandreas
 ```
 
 By default, the link `title` will be set to the domain name, e.g. _github.com_.

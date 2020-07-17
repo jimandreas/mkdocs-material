@@ -14,7 +14,7 @@ Markdown file was last updated at the bottom of each page.
     the [getting started guide][3] to get up and running with Docker.
 
   [1]: https://github.com/timvink/mkdocs-git-revision-date-localized-plugin
-  [2]: https://hub.docker.com/r/squidfunk/mkdocs-material/
+  [2]: https://hub.docker.com/r/jimandreas/mkdocs-material/
   [3]: ../getting-started.md#with-docker-recommended
 
 !!! warning "Requirements"
