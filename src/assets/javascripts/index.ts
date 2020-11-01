@@ -26,7 +26,6 @@
 
 import "focus-visible"
 
-import { sortBy, prop, values } from "ramda"
 import {
   merge,
   combineLatest,
@@ -37,7 +36,6 @@ import {
   of,
   NEVER
 } from "rxjs"
-import { ajax } from "rxjs/ajax"
 import {
   delay,
   switchMap,
@@ -47,7 +45,6 @@ import {
   observeOn,
   take,
   shareReplay,
-  pluck,
   catchError,
   map
 } from "rxjs/operators"
@@ -67,7 +64,6 @@ import {
 } from "browser"
 import {
   mountHeader,
-  mountHero,
   mountMain,
   mountNavigation,
   mountSearch,
@@ -85,7 +81,8 @@ import {
   setupKeyboard,
   setupInstantLoading,
   setupSearchWorker,
-  SearchIndex
+  SearchIndex,
+  SearchIndexPipeline
 } from "integrations"
 import {
   patchCodeBlocks,
@@ -167,7 +164,6 @@ export function initialize(config: unknown) {
     "container",                       /* Container */
     "header",                          /* Header */
     "header-title",                    /* Header title */
-    "hero",                            /* Hero */
     "main",                            /* Main area */
     "navigation",                      /* Navigation */
     "search",                          /* Search */
@@ -231,12 +227,6 @@ export function initialize(config: unknown) {
       shareReplay({ bufferSize: 1, refCount: true })
     )
 
-  const hero$ = useComponent("hero")
-    .pipe(
-      mountHero({ header$, viewport$ }),
-      shareReplay({ bufferSize: 1, refCount: true })
-    )
-
   /* ----------------------------------------------------------------------- */
 
   /* Search worker - only if search is present */
@@ -248,20 +238,16 @@ export function initialize(config: unknown) {
           : undefined
 
         /* Fetch index if it wasn't passed explicitly */
-        const index$ = typeof index !== "undefined"
-          ? from(index)
-          : base$
-              .pipe(
-                switchMap(base => ajax({
-                  url: `${base}/search/search_index.json`,
-                  responseType: "json",
-                  withCredentials: true
-                })
-                  .pipe<SearchIndex>(
-                    pluck("response")
-                  )
+        const index$ = (
+          typeof index !== "undefined"
+            ? from(index)
+            : base$
+                .pipe(
+                  switchMap(base => fetch(`${base}/search/search_index.json`, {
+                    credentials: "same-origin"
+                  }).then(res => res.json())) // SearchIndex
                 )
-              )
+        )
 
         return of(setupSearchWorker(config.search.worker, {
           base$, index$
@@ -362,20 +348,19 @@ export function initialize(config: unknown) {
       })
 
   /* Enable instant loading, if not on file:// protocol */
-  if (config.features.includes("instant") && location.protocol !== "file:") {
+  if (
+    config.features.includes("navigation.instant") &&
+    location.protocol !== "file:"
+  ) {
+    const dom = new DOMParser()
 
     /* Fetch sitemap and extract URL whitelist */
     base$
       .pipe(
-        switchMap(base => ajax({
-          url: `${base}/sitemap.xml`,
-          responseType: "document",
-          withCredentials: true
-        })
-          .pipe<Document>(
-            pluck("response")
-          )
-        ),
+        switchMap(base => from(fetch(`${base}/sitemap.xml`)
+          .then(res => res.text())
+          .then(text => dom.parseFromString(text, "text/xml"))
+        )),
         withLatestFrom(base$),
         map(([document, base]) => {
           const urls = getElements("loc", document)
@@ -388,7 +373,7 @@ export function initialize(config: unknown) {
           // domain. If there're no two domains, we just leave it as-is, as
           // there isn't anything to be loaded anway.
           if (urls.length > 1) {
-            const [a, b] = sortBy(prop("length"), urls)
+            const [a, b] = urls.sort((a, b) => a.length - b.length)
 
             /* Determine common prefix */
             let index = 0
@@ -434,7 +419,6 @@ export function initialize(config: unknown) {
 
     /* Component observables */
     header$,
-    hero$,
     main$,
     navigation$,
     search$,
@@ -448,7 +432,7 @@ export function initialize(config: unknown) {
   }
 
   /* Subscribe to all observables */
-  merge(...values(state))
+  merge(...Object.values(state))
     .subscribe()
   return state
 }

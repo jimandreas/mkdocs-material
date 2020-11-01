@@ -29,7 +29,7 @@ Material for MkDocs can be installed with `pip`:
     pip install mkdocs-material
     ```
 
-=== "Material for MkDocs Insiders"
+=== "Insiders"
 
     ``` sh
     pip install git+https://${GH_TOKEN}@github.com/squidfunk/mkdocs-material-insiders.git
@@ -40,9 +40,9 @@ This will automatically install compatible versions of all dependencies:
 Material for MkDocs always strives to support the latest versions, so there's
 no need to install those packages separately.
 
-Note that in order to install [__Material for MkDocs Insiders__][8], you'll
-need to [become a sponsor][9], create a [personal access token][10], and set
-the `GH_TOKEN` environment variable to the token's value.
+_Note that in order to install [Material for MkDocs Insiders][8], you'll
+need to [become a sponsor][9], create a [personal access token][10][^1], and
+set the_ `GH_TOKEN` _environment variable to the token's value._
 
   [5]: https://python-markdown.github.io/
   [6]: https://pygments.org/
@@ -67,20 +67,36 @@ covered in the following sections.
 
 The following plugins are bundled with the Docker image:
 
-* [mkdocs-awesome-pages-plugin][12]
-* [mkdocs-git-revision-date-localized-plugin][13]
-* [mkdocs-minify-plugin][14]
-* [mkdocs-redirects][15]
+* [mkdocs-minify-plugin][12]
+* [mkdocs-redirects][13]
 
   [11]: https://hub.docker.com/r/squidfunk/mkdocs-material/
-  [12]: https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin
-  [13]: https://github.com/timvink/mkdocs-git-revision-date-localized-plugin
-  [14]: https://github.com/byrnereese/mkdocs-minify-plugin
-  [15]: https://github.com/datarobot/mkdocs-redirects
+  [12]: https://github.com/byrnereese/mkdocs-minify-plugin
+  [13]: https://github.com/datarobot/mkdocs-redirects
+
+??? question "How can I add plugins to the Docker image?"
+
+    Material for MkDocs bundles useful and common plugins while trying not to
+    blow up the size of the official image. If the plugin you want to use is
+    not included, create a new `Dockerfile` and extend the official Docker image
+    with your custom installation routine:
+
+    ``` Dockerfile
+    FROM squidfunk/mkdocs-material
+    RUN pip install ...
+    ```
+
+    Next, you can build the image with the following command:
+
+    ```
+    docker build -t squidfunk/mkdocs-material .
+    ```
+
+    The new image can be used exactly like the official image.
 
 ### with git
 
-Material for MkDocs can be directly used from [GitHub][16] by cloning the
+Material for MkDocs can be directly used from [GitHub][14] by cloning the
 repository into a subfolder of your project root which might be useful if you
 want to use the very latest version:
 
@@ -90,20 +106,31 @@ want to use the very latest version:
     git clone https://github.com/squidfunk/mkdocs-material.git
     ```
 
-=== "Material for MkDocs Insiders"
+=== "Insiders"
 
     ```
     git clone git@github.com:squidfunk/mkdocs-material-insiders.git mkdocs-material
     ```
 
-The theme will reside in the folder `mkdocs-material/material`. Note that when
-cloning from `git`, you must install all required dependencies yourself:
+The theme will reside in the folder `mkdocs-material/material`. When cloning
+from `git`, you must install all required dependencies yourself:
 
 ```
 pip install -r mkdocs-material/requirements.txt
 ```
 
-Note that in order to install [__Material for MkDocs Insiders__][8], you'll
-need to [become a sponsor][9].
+_Note that in order to install [Material for MkDocs Insiders][8], you'll
+need to [become a sponsor][9]._
 
-  [16]: https://github.com/squidfunk/mkdocs-material
+  [14]: https://github.com/squidfunk/mkdocs-material
+
+  [^1]:
+    In order to use `pip` to install from the private repository over HTTPS, the
+    personal access token requires the [`repo`][15] scope. The creation and
+    usage of an access token is only necessary when installing Insiders over
+    HTTPS, which is the recommended way when building from within a CI/CD
+    workflow, e.g. using [GitHub Pages][16] or [GitLab Pages][17].
+
+  [15]: https://docs.github.com/en/developers/apps/scopes-for-oauth-apps#available-scopes
+  [16]: publishing-your-site.md#github-pages
+  [17]: publishing-your-site.md#gitlab-pages

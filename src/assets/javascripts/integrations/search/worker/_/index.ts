@@ -20,7 +20,6 @@
  * IN THE SOFTWARE.
  */
 
-import { identity } from "ramda"
 import { Observable, Subject, asyncScheduler } from "rxjs"
 import {
   map,
@@ -53,7 +52,7 @@ interface SetupOptions {
 }
 
 /* ----------------------------------------------------------------------------
- * Helper functions
+ * Functions
  * ------------------------------------------------------------------------- */
 
 /**
@@ -78,14 +77,14 @@ function setupSearchIndex(
   /* Set pipeline from translation */
   const pipeline = translate("search.config.pipeline")
     .split(/\s*,\s*/)
-    .filter(identity) as SearchIndexPipeline
+    .filter(Boolean) as SearchIndexPipeline
 
   /* Return search index after defaulting */
   return { config, docs, index, pipeline }
 }
 
 /* ----------------------------------------------------------------------------
- * Functions
+ * Helper functions
  * ------------------------------------------------------------------------- */
 
 /**
@@ -112,11 +111,9 @@ export function setupSearchWorker(
       withLatestFrom(base$),
       map(([message, base]) => {
         if (isSearchResultMessage(message)) {
-          for (const { article, sections } of message.data) {
-            article.location = `${base}/${article.location}`
-            for (const section of sections)
-              section.location = `${base}/${section.location}`
-          }
+          for (const result of message.data)
+            for (const document of result)
+              document.location = `${base}/${document.location}`
         }
         return message
       }),
@@ -126,9 +123,9 @@ export function setupSearchWorker(
   /* Set up search index */
   index$
     .pipe(
-      map<SearchIndex, SearchSetupMessage>(index => ({
+      map<SearchIndex, SearchSetupMessage>(data => ({
         type: SearchMessageType.SETUP,
-        data: setupSearchIndex(index)
+        data: setupSearchIndex(data)
       })),
       observeOn(asyncScheduler)
     )

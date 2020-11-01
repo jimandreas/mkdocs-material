@@ -1,3 +1,95 @@
+mkdocs-material-6.x.x (2020-xx-xx)
+
+  * Fixed link colors for black and white on slate color scheme
+  * Removed focus outline on scrolling code blocks for pointer devices
+
+mkdocs-material-6.1.2+insiders-1.8.0 (2020-11-01)
+
+  * Added support for navigation sections
+  * Fixed appearance of inactive search suggestions
+
+mkdocs-material-6.1.2 (2020-10-31)
+
+  * Fixed sizing of icons in Admonition, Tasklist, etc. (6.1.1 regression)
+
+mkdocs-material-6.1.1 (2020-10-31)
+
+  * Fixed #2019: Page title not correctly updated when using instant loading
+
+mkdocs-material-6.1.0+insiders-1.7.0 (2020-10-25)
+
+  * Added support for deploying multiple versions
+  * Fixed alignment of sidebar when content area is too small
+
+mkdocs-material-6.1.0 (2020-10-17)
+
+  * Fixed #1973: Added support for printing in dark mode
+  * Fixed #1974: Added support for printing content tabs
+  * Fixed #1995: Improved customizability of details extension
+
+mkdocs-material-6.0.2+insiders-1.6.0 (2020-10-11)
+
+  * Added support for search suggestions to save keystrokes
+  * Added support for removing 'Made with Material for MkDocs' from footer
+  * Fixed #1915: search should go to first result by pressing Enter
+
+mkdocs-material-6.0.2 (2020-10-04)
+
+  * Added Georgian translations
+  * Added escaping for link title attributes where necessary
+  * Fixed #1956: Pages with whitespace in names have invalid links in search
+  * Removed unnecessary (duplicated) link title attributes
+
+mkdocs-material-6.0.1 (2020-09-26)
+
+  * Fixed stemmer support for file:// protocol through iframe-worker
+  * Fixed details marker showing for search result in Firefox
+  * Fixed tabbing behavior when search query is not empty
+  * Switched TypeScript compilation target to ES2015
+  * Reduced size of JavaScript by 30% (176kb → 124kb)
+  * Removed mkdocs and readthedocs themes from Docker image
+
+mkdocs-material-6.0.0 (2020-09-25)
+
+  * Improved search result look and feel
+  * Improved search result stability while typing
+  * Improved search result grouping (pages + headings)
+  * Improved search result relevance and scoring
+  * Added display of missing query terms to search results
+  * Reduced size of vendor bundle by 25% (84kb → 67kb)
+  * Reduced size of the Docker image to improve CI build performance
+  * Removed hero partial in favor of custom implementation
+  * Removed deprecated front matter features
+
+mkdocs-material-5.5.14 (2020-09-23)
+
+  * Improved spacing around image captions
+  * Fixed #1939: Long tables cause header overlap in print view
+
+mkdocs-material-5.5.13+insiders-1.5.1 (2020-09-21)
+
+  * Fixed content area stretching to whole width for long code blocks
+
+mkdocs-material-5.5.13+insiders-1.5.0 (2020-09-19)
+
+  * Added support for autohiding table of contents when empty
+
+mkdocs-material-5.5.13 (2020-09-19)
+
+  * Improved abbreviations on touch devices
+
+mkdocs-material-5.5.12+insiders-1.4.1 (2020-09-06)
+
+  * Improved typeahead and search result relevance and scoring
+
+mkdocs-material-5.5.12 (2020-08-31)
+
+  * Fixed #1638: occasional 404 for images when using instant loading
+
+mkdocs-material-5.5.11+insiders-1.4.0 (2020-08-30)
+
+  * Added support for autohiding header on scroll
+
 mkdocs-material-5.5.11 (2020-08-28)
 
   * Fixed Disqus integration, as the minifier killed the config

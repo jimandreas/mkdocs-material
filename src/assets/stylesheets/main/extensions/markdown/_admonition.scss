@@ -118,9 +118,10 @@ $admonitions: (
   .admonition-title {
     position: relative;
     margin: 0 px2rem(-12px) 0 px2rem(-16px);
-    padding: px2rem(8px) px2rem(12px) px2rem(8px) px2rem(44px);
+    padding: px2rem(8px) px2rem(12px) px2rem(8px) px2rem(40px);
     font-weight: 700;
     background-color: transparentize($clr-blue-a200, 0.9);
+    border-left: px2rem(4px) solid $clr-blue-a200;
 
     // Adjust for right-to-left languages
     [dir="rtl"] & {
@@ -136,12 +137,13 @@ $admonitions: (
     // Admonition icon
     &::before {
       position: absolute;
-      left: px2rem(16px);
+      left: px2rem(12px);
       width: px2rem(20px);
       height: px2rem(20px);
       background-color: $clr-blue-a200;
       mask-image: var(--md-admonition-icon--note);
       mask-repeat: no-repeat;
+      mask-size: contain;
       content: "";
 
       // Adjust for right-to-left languages
@@ -184,12 +186,14 @@ $admonitions: (
   // Admonition title
   .md-typeset .#{$name} > .admonition-title {
     background-color: transparentize($tint, 0.9);
+    border-color: $tint;
 
     // Admonition icon
     &::before {
       background-color: $tint;
       mask-image: var(--md-admonition-icon--#{$name});
       mask-repeat: no-repeat;
+      mask-size: contain;
     }
   }
 

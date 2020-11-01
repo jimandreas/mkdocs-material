@@ -6,24 +6,28 @@ template: overrides/main.html
 
 A clear and concise navigation structure is an important aspect of good project 
 documentation. Material for MkDocs provides several options to configure the
-behavior of navigational elements, some of those through _feature flags_.
+behavior of navigational elements, including [tabs][1] and [sections][2], and
+its flag-ship feature: [instant loading][3].
+
+  [1]: #navigation-tabs
+  [2]: #navigation-sections
+  [3]: #instant-loading
 
 ## Configuration
 
 ### Instant loading
 
-[:octicons-file-code-24: Source][1] · 
-:octicons-unlock-24: Feature flag · 
-:octicons-beaker-24: Experimental
+[:octicons-file-code-24: Source][4] ·
+:octicons-unlock-24: Feature flag
 
-When _instant loading_ is activated, clicks on all internal links will be
-intercepted and dispatched via [XHR][2] without fully reloading the page. It
+When _instant loading_ is enabled, clicks on all internal links will be
+intercepted and dispatched via [XHR][5] without fully reloading the page. It
 can be enabled via `mkdocs.yml` with:
 
 ``` yaml
 theme:
   features:
-    - instant
+    - navigation.instant
 ```
 
 The resulting page is parsed and injected and all event handlers and components
@@ -32,44 +36,27 @@ Single Page Application__, which is especially useful for large documentation
 sites that come with a massive search index, as the search index will now
 remain intact in-between document switches.
 
-  [1]: https://github.com/squidfunk/mkdocs-material/blob/master/src/assets/javascripts/integrations/instant/index.ts
-  [2]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+_Material for MkDocs is the only MkDocs theme offering this feature._
 
-### Navigation expansion
-
-[:octicons-file-code-24: Source][3] ·
-:octicons-unlock-24: Feature flag ·
-:octicons-beaker-24: Experimental ·
-[:octicons-heart-fill-24:{: .tx-heart } Insiders only][3]{: .tx-insiders }
-
-When `navigation.expand` is activated, the left sidebar will expand all
-collapsible subsections by default, so the user doesn't have to do it manually.
-It can be enabled via `mkdocs.yml` with:
-
-``` yaml
-theme:
-  features:
-    - navigation.expand
-```
-
-  [3]: ../insiders.md
+  [4]: https://github.com/squidfunk/mkdocs-material/blob/master/src/assets/javascripts/integrations/instant/index.ts
+  [5]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
 
 ### Navigation tabs
 
-[:octicons-file-code-24: Source][4] · :octicons-unlock-24: Feature flag
+[:octicons-file-code-24: Source][6] · :octicons-unlock-24: Feature flag
 
-When _tabs_ are activated, top-level sections are rendered in a menu layer
-below the header on big screens (but not when the sidebar is hidden). It can be
+When _tabs_ are enabled, top-level sections are rendered in a menu layer below
+the header on big screens (but not when the sidebar is hidden). They can be
 enabled via `mkdocs.yml` with:
 
 ``` yaml
 theme:
   features:
-    - tabs
+    - navigation.tabs
 ```
 
 Note that all __top-level pages__ (i.e. all top-level entries that directly
-refer to an `*.md` file) defined inside the [`nav`][5] entry of `mkdocs.yml`
+refer to an `*.md` file) defined inside the [`nav`][7] entry of `mkdocs.yml`
 will be grouped under the first tab which will receive the title of the first
 page.
 
@@ -107,18 +94,59 @@ sections. This is illustrated in the following example:
     ```
 
 Note that tabs are only shown for larger screens, so make sure that navigation
-is plausible on mobile devices. As another example, see the [`mkdocs.yml`][6]
+is plausible on mobile devices. As another example, see the [`mkdocs.yml`][8]
 used to render these pages.
 
-  [4]: https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/tabs.html
-  [5]: https://www.mkdocs.org/user-guide/configuration/#nav
-  [6]: https://github.com/squidfunk/mkdocs-material/blob/master/mkdocs.yml
+  [6]: https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/tabs.html
+  [7]: https://www.mkdocs.org/user-guide/configuration/#nav
+  [8]: https://github.com/squidfunk/mkdocs-material/blob/master/mkdocs.yml
+
+### Navigation sections
+
+[:octicons-file-code-24: Source][9] ·
+:octicons-unlock-24: Feature flag ·
+[:octicons-heart-fill-24:{: .tx-heart } Insiders only][9]{: .tx-insiders }
+
+When _sections_ are enabled, top-level sections are rendered as groups in the
+sidebar on big screens (but not when the sidebar is hidden). It can be enabled
+via `mkdocs.yml`:
+
+``` yaml
+theme:
+  features:
+    - navigation.sections
+```
+
+Both feature flags, _tabs_ and _sections_, can be combined with each other. If
+both feature flags are enabled, sections are rendered for 2nd level navigation
+items.
+
+[![Search highlighting][10]][10]
+
+  [9]: ../insiders.md
+  [10]: ../assets/screenshots/navigation-sections.png
+
+### Navigation expansion
+
+[:octicons-file-code-24: Source][9] ·
+:octicons-unlock-24: Feature flag ·
+[:octicons-heart-fill-24:{: .tx-heart } Insiders only][9]{: .tx-insiders }
+
+When _expansion_ is enabled, the left sidebar will expand all collapsible
+subsections by default, so the user doesn't have to open subsections manually.
+It can be enabled via `mkdocs.yml` with:
+
+``` yaml
+theme:
+  features:
+    - navigation.expand
+```
 
 ### Table of contents
 
-[:octicons-file-code-24: Source][7] · [:octicons-workflow-24: Extension][8]
+[:octicons-file-code-24: Source][11] · [:octicons-workflow-24: Extension][12]
 
-The [Table of contents][9] extension, which is part of the standard Markdown
+The [Table of contents][13] extension, which is part of the standard Markdown
 library, provides some options that are supported by Material for MkDocs to
 customize its appearance:
 
@@ -150,14 +178,14 @@ customize its appearance:
 :   :octicons-milestone-24: Default: `headerid.slugify` – This option allows for 
     customization of the slug function. For some languages, the default may not
     produce good and readable identifiers. Consider using another slug function
-    like for example those from [Python Markdown Extensions][10]:
+    like for example those from [Python Markdown Extensions][14]:
 
     === "Unicode"
 
         ``` yaml
         markdown_extensions:
           - toc:
-              slugify: pymdownx.slugs.uslugify
+              slugify: !!python/name:pymdownx.slugs.uslugify
         ```
 
     === "Unicode, case-sensitive"
@@ -165,7 +193,7 @@ customize its appearance:
         ``` yaml
         markdown_extensions:
           - toc:
-              slugify: pymdownx.slugs.uslugify_cased
+              slugify: !!python/name:pymdownx.slugs.uslugify_cased
         ```
 
 `toc_depth`{: #toc_depth }
@@ -195,16 +223,35 @@ _Material for MkDocs doesn't provide official support for the other options of
 this extension, so they may be supported but can also yield weird results. Use
 them at your own risk._
 
-  [7]: https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/toc.html
-  [8]: https://python-markdown.github.io/extensions/toc/
-  [9]: https://python-markdown.github.io/extensions/toc/#usage
-  [10]: https://facelessuser.github.io/pymdown-extensions/extras/slugs/
+  [11]: https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/toc.html
+  [12]: https://python-markdown.github.io/extensions/toc/
+  [13]: https://python-markdown.github.io/extensions/toc/#usage
+  [14]: https://facelessuser.github.io/pymdown-extensions/extras/slugs/
+
+#### Automatic hiding
+
+[:octicons-file-code-24: Source][3] ·
+:octicons-unlock-24: Feature flag ·
+:octicons-beaker-24: Experimental ·
+[:octicons-heart-fill-24:{: .tx-heart } Insiders only][3]{: .tx-insiders }
+
+When _autohiding_ is enabled, the table of contents is automatically hidden
+when the current page defines no headings, or only a single `h1` heading to be
+rendered, so content stretches.
+
+It can be enabled via `mkdocs.yml` with:
+
+``` yaml
+theme:
+  features:
+    - toc.autohide
+```
 
 ## Customization
 
 ### Keyboard shortcuts
 
-[:octicons-file-code-24: Source][11] ·
+[:octicons-file-code-24: Source][15] ·
 :octicons-mortar-board-24: Difficulty: _easy_
 
 Material for MkDocs includes several keyboard shortcuts that make it possible
@@ -230,11 +277,11 @@ to navigate your project documentation via keyboard. There're two modes:
     * ++n++ , ++period++ : go to next page
 
 Let's say you want to bind some action to the ++x++ key. By using [additional
-JavaScript][12], you can subscribe to the `keyboard$` observable and attach
+JavaScript][16], you can subscribe to the `keyboard$` observable and attach
 your custom event listener:
 
 ``` js
-app.keyboard$.subscribe(key => {
+app.keyboard$.subscribe(function(key) {
   if (key.mode === "global" && key.type === "x") {
     /* Add custom keyboard handler here */
     key.claim()
@@ -246,5 +293,5 @@ The call to `#!js key.claim()` will essentially execute `#!js preventDefault()`
 on the underlying event, so the keypress will not propagate further and touch
 other event listeners.
 
-  [11]: https://github.com/squidfunk/mkdocs-material/blob/master/src/assets/javascripts/integrations/keyboard/index.ts
-  [12]: ../customization.md#additional-javascript
+  [15]: https://github.com/squidfunk/mkdocs-material/blob/master/src/assets/javascripts/integrations/keyboard/index.ts
+  [16]: ../customization.md#additional-javascript

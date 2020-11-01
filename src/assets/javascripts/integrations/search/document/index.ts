@@ -20,6 +20,7 @@
  * IN THE SOFTWARE.
  */
 
+// @ts-ignore
 import * as escapeHTML from "escape-html"
 
 import { SearchIndexDocument } from "../_"
@@ -29,27 +30,13 @@ import { SearchIndexDocument } from "../_"
  * ------------------------------------------------------------------------- */
 
 /**
- * A top-level article
+ * Search document
  */
-export interface ArticleDocument extends SearchIndexDocument {
-  linked: boolean                      /* Whether the section was linked */
-}
-
-/**
- * A section of an article
- */
-export interface SectionDocument extends SearchIndexDocument {
-  parent: ArticleDocument              /* Parent article */
+export interface SearchDocument extends SearchIndexDocument {
+  parent?: SearchIndexDocument         /* Parent article */
 }
 
 /* ------------------------------------------------------------------------- */
-
-/**
- * Search document
- */
-export type SearchDocument =
-  | ArticleDocument
-  | SectionDocument
 
 /**
  * Search document mapping
@@ -71,6 +58,7 @@ export function setupSearchDocumentMap(
   docs: SearchIndexDocument[]
 ): SearchDocumentMap {
   const documents = new Map<string, SearchDocument>()
+  const parents   = new Set<SearchDocument>()
   for (const doc of docs) {
     const [path, hash] = doc.location.split("#")
 
@@ -85,13 +73,15 @@ export function setupSearchDocumentMap(
 
     /* Handle section */
     if (hash) {
-      const parent = documents.get(path) as ArticleDocument
+      const parent = documents.get(path)!
 
       /* Ignore first section, override article */
-      if (!parent.linked) {
-        parent.title  = doc.title
-        parent.text   = text
-        parent.linked = true
+      if (!parents.has(parent)) {
+        parent.title = doc.title
+        parent.text  = text
+
+        /* Remember that we processed the article */
+        parents.add(parent)
 
       /* Add subsequent section */
       } else {
@@ -108,8 +98,7 @@ export function setupSearchDocumentMap(
       documents.set(location, {
         location,
         title,
-        text,
-        linked: false
+        text
       })
     }
   }

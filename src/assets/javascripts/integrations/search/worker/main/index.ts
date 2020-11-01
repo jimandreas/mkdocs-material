@@ -23,31 +23,70 @@
 import "lunr"
 
 import { Search, SearchIndexConfig } from "../../_"
-import { SearchMessage, SearchMessageType } from "../message"
+import {
+  SearchMessage,
+  SearchMessageType
+} from "../message"
+
+/* ----------------------------------------------------------------------------
+ * Types
+ * ------------------------------------------------------------------------- */
+
+/**
+ * Add support for usage with `iframe-worker` polyfill
+ *
+ * While `importScripts` is synchronous when executed inside of a web worker,
+ * it's not possible to provide a synchronous polyfilled implementation. The
+ * cool thing is that awaiting a non-Promise is a noop, so extending the type
+ * definition to return a `Promise` shouldn't break anything.
+ *
+ * @see https://bit.ly/2PjDnXi - GitHub comment
+ */
+declare global {
+  function importScripts(...urls: string[]): Promise<void> | void
+}
 
 /* ----------------------------------------------------------------------------
  * Data
  * ------------------------------------------------------------------------- */
 
 /**
- * Search
+ * Search index
  */
-let search: Search
+let index: Search
 
 /* ----------------------------------------------------------------------------
  * Helper functions
  * ------------------------------------------------------------------------- */
 
 /**
- * Set up multi-language support through `lunr-languages`
+ * Fetch (= import) multi-language support through `lunr-languages`
  *
  * This function will automatically import the stemmers necessary to process
  * the languages which were given through the search index configuration.
  *
+ * If the worker runs inside of an `iframe` (when using `iframe-worker` as
+ * a shim), the base URL for the stemmers to be loaded must be determined by
+ * searching for the first `script` element with a `src` attribute, which will
+ * contain the contents of this script.
+ *
  * @param config - Search index configuration
+ *
+ * @return Promise resolving with no result
  */
-function setupLunrLanguages(config: SearchIndexConfig): void {
-  const base = "../lunr"
+async function setupSearchLanguages(
+  config: SearchIndexConfig
+): Promise<void> {
+  let base = "../lunr"
+
+  /* Detect `iframe-worker` and fix base URL */
+  if (typeof parent !== "undefined" && "IFrameWorker" in parent) {
+    const worker = document.querySelector<HTMLScriptElement>("script[src]")!
+    const [path] = worker.src.split("/worker")
+
+    /* Prefix base with path */
+    base = base.replace("..", path)
+  }
 
   /* Add scripts for languages */
   const scripts = []
@@ -62,7 +101,7 @@ function setupLunrLanguages(config: SearchIndexConfig): void {
 
   /* Load scripts synchronously */
   if (scripts.length)
-    importScripts(
+    await importScripts(
       `${base}/min/lunr.stemmer.support.min.js`,
       ...scripts
     )
@@ -79,13 +118,15 @@ function setupLunrLanguages(config: SearchIndexConfig): void {
  *
  * @return Target message
  */
-export function handler(message: SearchMessage): SearchMessage {
+export async function handler(
+  message: SearchMessage
+): Promise<SearchMessage> {
   switch (message.type) {
 
     /* Search setup message */
     case SearchMessageType.SETUP:
-      setupLunrLanguages(message.data.config)
-      search = new Search(message.data)
+      await setupSearchLanguages(message.data.config)
+      index = new Search(message.data)
       return {
         type: SearchMessageType.READY
       }
@@ -94,7 +135,7 @@ export function handler(message: SearchMessage): SearchMessage {
     case SearchMessageType.QUERY:
       return {
         type: SearchMessageType.RESULT,
-        data: search ? search.query(message.data) : []
+        data: index ? index.search(message.data) : []
       }
 
     /* All other messages */
@@ -107,6 +148,6 @@ export function handler(message: SearchMessage): SearchMessage {
  * Worker
  * ------------------------------------------------------------------------- */
 
-addEventListener("message", ev => {
-  postMessage(handler(ev.data))
+addEventListener("message", async ev => {
+  postMessage(await handler(ev.data))
 })

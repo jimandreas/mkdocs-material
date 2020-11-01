@@ -20,38 +20,77 @@
  * IN THE SOFTWARE.
  */
 
-import { SearchResult } from "integrations/search"
-import { h, truncate } from "utilities"
+import {
+  SearchDocument,
+  SearchMetadata,
+  SearchResult
+} from "integrations/search"
+import { h, translate, truncate } from "utilities"
 
 /* ----------------------------------------------------------------------------
- * Data
+ * Helper types
  * ------------------------------------------------------------------------- */
 
 /**
- * CSS classes
+ * Render flag
  */
-const css = {
-  item:    "md-search-result__item",
-  link:    "md-search-result__link",
-  article: "md-search-result__article md-search-result__article--document",
-  section: "md-search-result__article",
-  title:   "md-search-result__title",
-  teaser:  "md-search-result__teaser"
+const enum Flag {
+  TEASER = 1,                          /* Render teaser */
+  PARENT = 2                           /* Render as parent */
 }
 
-/* ------------------------------------------------------------------------- */
+/* ----------------------------------------------------------------------------
+ * Helper function
+ * ------------------------------------------------------------------------- */
 
 /**
- * Path of `content-copy` icon
+ * Render a search document
+ *
+ * @param section - Search document
+ * @param flag - Render flags
+ *
+ * @return Element
  */
-const path =
-  "M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H13C12.59,21.75 12.2,21.44 " +
-  "11.86,21.1C11.53,20.77 11.25,20.4 11,20H6V4H13V9H18V10.18C18.71,10.34 " +
-  "19.39,10.61 20,11V8L14,2M20.31,18.9C21.64,16.79 21,14 " +
-  "18.91,12.68C16.8,11.35 14,12 12.69,14.08C11.35,16.19 12,18.97 " +
-  "14.09,20.3C15.55,21.23 17.41,21.23 " +
-  "18.88,20.32L22,23.39L23.39,22L20.31,18.9M16.5,19A2.5,2.5 0 0,1 " +
-  "14,16.5A2.5,2.5 0 0,1 16.5,14A2.5,2.5 0 0,1 19,16.5A2.5,2.5 0 0,1 16.5,19Z"
+function renderSearchDocument(
+  document: SearchDocument & SearchMetadata, flag: Flag
+) {
+  const parent = flag & Flag.PARENT
+  const teaser = flag & Flag.TEASER
+
+  /* Render missing query terms */
+  const missing = Object.keys(document.terms)
+    .filter(key => !document.terms[key])
+    .map(key => [<del>{key}</del>, " "])
+    .flat()
+    .slice(0, -1)
+
+  /* Render article or section, depending on flags */
+  const url = document.location
+  return (
+    <a href={url} class="md-search-result__link" tabIndex={-1}>
+      <article
+        class={["md-search-result__article", ...parent
+          ? ["md-search-result__article--document"]
+          : []
+        ].join(" ")}
+        data-md-score={document.score.toFixed(2)}
+      >
+        {parent > 0 && <div class="md-search-result__icon md-icon"></div>}
+        <h1 class="md-search-result__title">{document.title}</h1>
+        {teaser > 0 && document.text.length > 0 &&
+          <p class="md-search-result__teaser">
+            {truncate(document.text, 320)}
+          </p>
+        }
+        {teaser > 0 && missing.length > 0 &&
+          <p class="md-search-result__terms">
+            {translate("search.result.term.missing")}: {...missing}
+          </p>
+        }
+      </article>
+    </a>
+  )
+}
 
 /* ----------------------------------------------------------------------------
  * Functions
@@ -61,39 +100,48 @@ const path =
  * Render a search result
  *
  * @param result - Search result
+ * @param threshold - Score threshold
  *
  * @return Element
  */
 export function renderSearchResult(
-  { article, sections }: SearchResult
+  result: SearchResult, threshold: number = Infinity
 ) {
+  const docs = [...result]
 
-  /* Render icon */
-  const icon = (
-    <div class="md-search-result__icon md-icon">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d={path}></path>
-      </svg>
-    </div>
-  )
+  /* Find and extract parent article */
+  const parent = docs.findIndex(doc => !doc.location.includes("#"))
+  const [article] = docs.splice(parent, 1)
 
-  /* Render article and sections */
-  const children = [article, ...sections].map(document => {
-    const { location, title, text } = document
-    return (
-      <a href={location} class={css.link} tabIndex={-1}>
-        <article class={"parent" in document ? css.section : css.article}>
-          {!("parent" in document) && icon}
-          <h1 class={css.title}>{title}</h1>
-          {text.length > 0 && <p class={css.teaser}>{truncate(text, 320)}</p>}
-        </article>
-      </a>
-    )
-  })
+  /* Determine last index above threshold */
+  let index = docs.findIndex(doc => doc.score < threshold)
+  if (index === -1)
+    index = docs.length
+
+  /* Partition sections */
+  const best = docs.slice(0, index)
+  const more = docs.slice(index)
+
+  /* Render children */
+  const children = [
+    renderSearchDocument(article, Flag.PARENT | +(!parent && index === 0)),
+    ...best.map(section => renderSearchDocument(section, Flag.TEASER)),
+    ...more.length ? [
+      <details class="md-search-result__more">
+        <summary tabIndex={-1}>
+          {more.length > 0 && more.length === 1
+            ? translate("search.result.more.one")
+            : translate("search.result.more.other", more.length)
+          }
+        </summary>
+        {...more.map(section => renderSearchDocument(section, Flag.TEASER))}
+      </details>
+    ] : []
+  ]
 
   /* Render search result */
   return (
-    <li class={css.item}>
+    <li class="md-search-result__item">
       {children}
     </li>
   )

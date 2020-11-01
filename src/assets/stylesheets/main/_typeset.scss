@@ -182,6 +182,12 @@ kbd {
     background-color: var(--md-code-bg-color);
     border-radius: px2rem(2px);
     box-decoration-break: clone;
+
+    // Disable focus indicator for pointer devices
+    &:not(.focus-visible) {
+      outline: none;
+      -webkit-tap-highlight-color: transparent;
+    }
   }
 
   // Disable containing block inside headlines
@@ -288,6 +294,32 @@ kbd {
     text-decoration: none;
     border-bottom: px2rem(1px) dotted var(--md-default-fg-color--light);
     cursor: help;
+
+    // Render a tooltip for touch devices
+    @media (hover: none) {
+      position: relative;
+
+      // Tooltip
+      &[title]:focus::after,
+      &[title]:hover::after {
+        @include z-depth(2);
+
+        position: absolute;
+        left: 0;
+        display: inline-block;
+        width: auto;
+        min-width: max-content;
+        max-width: 80%;
+        margin-top: 2em;
+        padding: px2rem(4px) px2rem(6px);
+        color: var(--md-default-bg-color);
+        font-size: px2rem(14px);
+        background: var(--md-default-fg-color);
+        border-radius: px2rem(2px);
+        content: attr(title);
+      }
+    }
+
   }
 
   // Small text
@@ -431,7 +463,7 @@ kbd {
   // Figure captions
   figcaption {
     max-width: px2rem(480px);
-    margin: 0.5em auto;
+    margin: 0.5em auto 2em;
     font-style: italic;
   }
 
@@ -452,6 +484,11 @@ kbd {
       0 px2rem(4px) px2rem(10px) hsla(0, 0%, 0%, 0.05),
       0 0           px2rem(1px)  hsla(0, 0%, 0%, 0.1);
     touch-action: auto;
+
+    // Reset display mode so table header wraps correctly when printing
+    @media print {
+      display: table;
+    }
 
     // Due to margin collapse because of the necessary inline-block hack, we
     // cannot increase the bottom margin on the table, so we just increase the
@@ -541,7 +578,8 @@ kbd {
       margin-left: 0.5em;
       vertical-align: sub;
       mask-repeat: no-repeat;
-      content: " ";
+      mask-size: contain;
+      content: "";
     }
 
     // Sort ascending
@@ -570,8 +608,13 @@ kbd {
     margin-bottom: 0.5em;
     padding: 0 px2rem(16px);
 
+    // Reset display mode so table header wraps correctly when printing
+    @media print {
+      display: block;
+    }
+
     // Data tables
-    table {
+    html & table {
       display: table;
       width: 100%;
       margin: 0;

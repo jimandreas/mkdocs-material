@@ -22,3 +22,4 @@
 
 export * from "./_"
 export * from "./react"
+export * from "./set"

@@ -20,8 +20,7 @@
  * IN THE SOFTWARE.
  */
 
-import { NEVER, Observable, Subject, fromEvent, merge, of } from "rxjs"
-import { ajax } from "rxjs//ajax"
+import { NEVER, Observable, Subject, from, fromEvent, merge, of } from "rxjs"
 import {
   bufferCount,
   catchError,
@@ -30,12 +29,10 @@ import {
   distinctUntilKeyChanged,
   filter,
   map,
-  pluck,
   sample,
   share,
   skip,
-  switchMap,
-  withLatestFrom
+  switchMap
 } from "rxjs/operators"
 
 import {
@@ -168,7 +165,7 @@ export function setupInstantLoading(
   merge(push$, pop$)
     .pipe(
       distinctUntilChanged((prev, next) => prev.url.href === next.url.href),
-      pluck("url")
+      map(({ url }) => url)
     )
       .subscribe(location$)
 
@@ -177,18 +174,17 @@ export function setupInstantLoading(
     .pipe(
       distinctUntilKeyChanged("pathname"),
       skip(1),
-      switchMap(url => ajax({
-        url: url.href,
-        responseType: "text",
-        withCredentials: true
-      })
+      switchMap(url => from(fetch(url.href, {
+        credentials: "same-origin"
+      }).then(res => res.text()))
         .pipe(
           catchError(() => {
             setLocation(url)
             return NEVER
           })
         )
-      )
+      ),
+      share()
     )
 
   /* Set new location as soon as the document was fetched */
@@ -204,7 +200,7 @@ export function setupInstantLoading(
   const dom = new DOMParser()
   ajax$
     .pipe(
-      map(({ response }) => dom.parseFromString(response, "text/html"))
+      map(response => dom.parseFromString(response, "text/html"))
     )
       .subscribe(document$)
 
@@ -224,11 +220,11 @@ export function setupInstantLoading(
   })
 
   /* Replace document metadata */
-  instant$
+  document$
     .pipe(
-      withLatestFrom(document$)
+      skip(1) // Skip initial
     )
-      .subscribe(([, { title, head }]) => {
+      .subscribe(({ title, head }) => {
         document.title = title
 
         /* Replace meta tags */

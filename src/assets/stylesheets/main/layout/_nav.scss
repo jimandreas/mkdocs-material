@@ -213,6 +213,7 @@
             background-color: currentColor;
             mask-image: var(--md-nav-icon--prev);
             mask-repeat: no-repeat;
+            mask-size: contain;
             content: "";
           }
 
@@ -330,6 +331,7 @@
             background-color: currentColor;
             mask-image: var(--md-nav-icon--next);
             mask-repeat: no-repeat;
+            mask-size: contain;
             content: "";
           }
 
@@ -341,16 +343,12 @@
         }
       }
 
-      // Navigation icon
-      .md-nav__icon {
+      // Flip icon vertically
+      .md-nav__icon::after {
 
         // Adjust for right-to-left languages
         [dir="rtl"] & {
-
-          // Flip icon vertically
-          &::after {
-            transform: scale(-1);
-          }
+          transform: scale(-1);
         }
       }
 
@@ -562,6 +560,7 @@
         background-color: currentColor;
         mask-image: var(--md-nav-icon--next);
         mask-repeat: no-repeat;
+        mask-size: contain;
         content: "";
       }
 

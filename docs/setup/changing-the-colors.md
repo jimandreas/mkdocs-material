@@ -190,7 +190,7 @@ color:
   :octicons-beaker-24: Experimental ·
   [:octicons-heart-fill-24:{: .tx-heart } Insiders only][6]{: .tx-insiders }
 
-[__Material for MkDocs Insiders__][6] makes it possible to define multiple color
+[Material for MkDocs Insiders][6] makes it possible to define multiple color
 palettes, including a [scheme][7], [primary][8] and [accent][9] color each, and
 let the user choose. Define them via `mkdocs.yml`:
 
@@ -233,8 +233,10 @@ color palettes:
     This field is used as the toggle's `title` attribute and should be set to a
     discernable name to improve accessibility.
 
-_Give this feature a try on [the official documentation][11] built with Material
-for MkDocs Insiders!_
+[Try this feature][11]{: .md-button .md-button--primary }
+
+_This feature is enabled on the [official documentation][11] built with
+Insiders._
 
   [6]: ../insiders.md
   [7]: #color-scheme
@@ -272,7 +274,7 @@ variables.
 
   [12]: https://github.com/squidfunk/mkdocs-material/blob/master/src/assets/stylesheets/main/_colors.scss
   [13]: https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties
-  [14]: ../customization.md#additional-stylesheets
+  [14]: ../customization.md#additional-css
 
 
 ### Custom color schemes

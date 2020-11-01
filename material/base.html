@@ -2,8 +2,6 @@
   This file was automatically generated - do not edit
 -#}
 {% import "partials/language.html" as lang with context %}
-{% set palette = config.theme.palette %}
-{% set font = config.theme.font %}
 <!doctype html>
 <html lang="{{ lang.t('language') }}" class="no-js">
   <head>
@@ -15,12 +13,7 @@
       {% elif config.site_description %}
         <meta name="description" content="{{ config.site_description }}">
       {% endif %}
-      {% if page and page.meta and page.meta.redirect %}
-        <script>var anchor=window.location.hash.substr(1);location.href="{{ page.meta.redirect }}"+(anchor?"#"+anchor:"")</script>
-        <meta http-equiv="refresh" content="0; url={{ page.meta.redirect }}">
-        <meta name="robots" content="noindex">
-        <link rel="canonical" href="{{ page.meta.redirect }}">
-      {% elif page.canonical_url %}
+      {% if page.canonical_url %}
         <link rel="canonical" href="{{ page.canonical_url }}">
       {% endif %}
       {% if page and page.meta and page.meta.author %}
@@ -29,7 +22,7 @@
         <meta name="author" content="{{ config.site_author }}">
       {% endif %}
       <link rel="shortcut icon" href="{{ config.theme.favicon | url }}">
-      <meta name="generator" content="mkdocs-{{ mkdocs_version }}, mkdocs-material-5.5.11">
+      <meta name="generator" content="mkdocs-{{ mkdocs_version }}, mkdocs-material-6.1.2">
     {% endblock %}
     {% block htmltitle %}
       {% if page and page.meta and page.meta.title %}
@@ -41,21 +34,23 @@
       {% endif %}
     {% endblock %}
     {% block styles %}
-      <link rel="stylesheet" href="{{ 'assets/stylesheets/main.e620dc14.min.css' | url }}">
-      {% if palette.scheme or palette.primary or palette.accent %}
-        <link rel="stylesheet" href="{{ 'assets/stylesheets/palette.a99d9558.min.css' | url }}">
-      {% endif %}
-      {% if palette.primary %}
-        {% import "partials/palette.html" as map %}
-        {% set primary = map.primary(
-          palette.primary | replace(" ", "-") | lower
-        ) %}
-        <meta name="theme-color" content="{{ primary }}">
+      <link rel="stylesheet" href="{{ 'assets/stylesheets/main.813c30d6.min.css' | url }}">
+      {% if config.theme.palette %}
+        {% set palette = config.theme.palette %}
+        <link rel="stylesheet" href="{{ 'assets/stylesheets/palette.f0267088.min.css' | url }}">
+        {% if palette.primary %}
+          {% import "partials/palette.html" as map %}
+          {% set primary = map.primary(
+            palette.primary | replace(" ", "-") | lower
+          ) %}
+          <meta name="theme-color" content="{{ primary }}">
+        {% endif %}
       {% endif %}
     {% endblock %}
     {% block libs %}{% endblock %}
     {% block fonts %}
-      {% if font != false %}
+      {% if config.theme.font != false %}
+        {% set font = config.theme.font %}
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family={{
             font.text | replace(' ', '+') + ':300,400,400i,700%7C' +
@@ -78,17 +73,21 @@
     {% block extrahead %}{% endblock %}
   </head>
   {% set direction = config.theme.direction or lang.t('direction') %}
-  {% if palette.scheme or palette.primary or palette.accent %}
-    {% set scheme  = palette.scheme | lower %}
+  {% if config.theme.palette %}
+    {% set palette = config.theme.palette %}
+    {% if not palette is mapping %}
+      {% set palette = palette | first %}
+    {% endif %}
+    {% set scheme  = palette.scheme  | replace(" ", "-") | lower %}
     {% set primary = palette.primary | replace(" ", "-") | lower %}
     {% set accent  = palette.accent  | replace(" ", "-") | lower %}
     <body dir="{{ direction }}" data-md-color-scheme="{{ scheme }}" data-md-color-primary="{{ primary }}" data-md-color-accent="{{ accent }}">
+      {% if "preference" == scheme %}
+        <script>matchMedia("(prefers-color-scheme: dark)").matches&&document.body.setAttribute("data-md-color-scheme","slate")</script>
+      {% endif %}
   {% else %}
     <body dir="{{ direction }}">
   {% endif %}
-    {% if "preference" == palette.scheme %}
-      <script>matchMedia("(prefers-color-scheme: dark)").matches&&document.body.setAttribute("data-md-color-scheme","slate")</script>
-    {% endif %}
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
@@ -113,13 +112,9 @@
       {% include "partials/header.html" %}
     {% endblock %}
     <div class="md-container" data-md-component="container">
-      {% block hero %}
-        {% if page and page.meta and page.meta.hero %}
-          {% include "partials/hero.html" with context %}
-        {% endif %}
-      {% endblock %}
+      {% block hero %}{% endblock %}
       {% block tabs %}
-        {% if "tabs" in config.theme.features %}
+        {% if "navigation.tabs" in config.theme.features %}
           {% include "partials/tabs.html" %}
         {% endif %}
       {% endblock %}
@@ -153,11 +148,6 @@
                     {% include ".icons/material/pencil.svg" %}
                   </a>
                 {% endif %}
-                {% block source %}
-                  {% if page and page.meta and page.meta.source %}
-                    {% include "partials/source-link.html" %}
-                  {% endif %}
-                {% endblock %}
                 {% if not "\x3ch1" in page.content %}
                   <h1>{{ page.title | default(config.site_name, true)}}</h1>
                 {% endif %}
@@ -182,8 +172,8 @@
       {% endblock %}
     </div>
     {% block scripts %}
-      <script src="{{ 'assets/javascripts/vendor.48dbe4ba.min.js' | url }}"></script>
-      <script src="{{ 'assets/javascripts/bundle.2854d19b.min.js' | url }}"></script>
+      <script src="{{ 'assets/javascripts/vendor.fd16492e.min.js' | url }}"></script>
+      <script src="{{ 'assets/javascripts/bundle.00f9b4e0.min.js' | url }}"></script>
       {%- set translations = {} -%}
       {%- for key in [
         "clipboard.copy",
@@ -191,10 +181,14 @@
         "search.config.lang",
         "search.config.pipeline",
         "search.config.separator",
+        "search.placeholder",
         "search.result.placeholder",
         "search.result.none",
         "search.result.one",
-        "search.result.other"
+        "search.result.other",
+        "search.result.more.one",
+        "search.result.more.other",
+        "search.result.term.missing"
       ] -%}
         {%- set _ = translations.update({ key: lang.t(key) }) -%}
       {%- endfor -%}
@@ -205,9 +199,9 @@
       <script>
         app = initialize({
           base: "{{ base_url }}",
-          features: {{ config.theme.features | tojson }},
+          features: {{ config.theme.features or [] | tojson }},
           search: Object.assign({
-            worker: "{{ 'assets/javascripts/worker/search.fae956e7.min.js' | url }}"
+            worker: "{{ 'assets/javascripts/worker/search.4ac00218.min.js' | url }}"
           }, typeof search !== "undefined" && search)
         })
       </script>

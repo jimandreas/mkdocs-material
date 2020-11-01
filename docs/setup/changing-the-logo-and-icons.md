@@ -53,7 +53,7 @@ theme:
   favicon: images/favicon.png
 ```
 
-  [4]: https://github.com/squidfunk/mkdocs-material/blob/master/src/base.html#L71
+  [4]: https://github.com/squidfunk/mkdocs-material/blob/master/src/base.html#L53-L54
 
 ### Icons
 
@@ -100,8 +100,6 @@ your project documentation. The structure of your project should look like this:
 
 ``` sh
 .
-├─ docs/
-│  └─ index.md
 ├─ overrides/
 │  └─ .icons/
 │     └─ bootstrap/

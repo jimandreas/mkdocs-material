@@ -130,21 +130,26 @@ For other installation methods, configuration options, and a demo, visit
 
   [1]: https://jimandreas.github.io/mkdocs-material/
 
-## Sponsors
+## Premium Sponsors
 
 <p>
-  <a href="https://cirrus-ci.org/" target=_blank>
-    <img src="https://raw.githubusercontent.com/squidfunk/mkdocs-material/master/.github/assets/sponsors/cirrus-ci.svg" width="155" />
-  </a>
+  <a href="https://docs.baslerweb.com/" target=_blank><img
+    src="https://raw.githubusercontent.com/squidfunk/mkdocs-material/master/.github/assets/sponsors/basler.png" width="155"
+  /></a>
+  <a href="https://cirrus-ci.org/" target=_blank><img
+    src="https://raw.githubusercontent.com/squidfunk/mkdocs-material/master/.github/assets/sponsors/cirrus-ci.svg" width="155"
+  /></a>
 </p>
 
 ## Users
 
 * **Companies** — 
-  [AWS](https://awssecworkshops.com/),
+  [AWS](https://aws.github.io/copilot-cli/),
+  [Binance](https://docs.binance.org/),
   [Datadog](https://datadoghq.dev/integrations-core/),
   [ING](https://ing-bank.github.io/baker/),
   [Lyft](https://lyft.github.io/amundsen/),
+  [Microsoft](https://www.electionguard.vote/),
   [Netflix](https://netflix.github.io/titus/),
   [Salesforce](https://policy-sentry.readthedocs.io/en/latest/),
   [SAP](https://sap.github.io/ui5-tooling/),

@@ -6,6 +6,38 @@ template: overrides/main.html
 
 ## Material for MkDocs Insiders
 
+### 1.8.0 <small>_ November 1, 2020</small>
+
+* Added support for navigation sections
+* Fixed appearance of inactive search suggestions
+
+### 1.7.0 <small>_ October 25, 2020</small>
+
+* Added support for deploying multiple versions
+* Fixed alignment of sidebar when content area is too small
+
+### 1.6.0 <small>_ October 11, 2020</small>
+
+* Added support for search suggestions to save keystrokes
+* Added support for removing __Made with Material for MkDocs__ from footer
+* Fixed #1915: search should go to first result by pressing ++enter++
+
+### 1.5.1 <small>_ September 21, 2020</small>
+
+* Fixed content area stretching to whole width for long code blocks
+
+### 1.5.0 <small>_ September 19, 2020</small>
+
+* Added support for autohiding table of contents when empty
+
+### 1.4.1 <small>_ September 6, 2020</small>
+
+* Improved typeahead and search result relevance and scoring
+
+### 1.4.0 <small>_ August 30, 2020</small>
+
+* Added support for auto-hiding header on scroll
+
 ### 1.3.0 <small>_ August 26, 2020</small>
 
 * Added support for user-selectable color palettes
@@ -26,9 +58,64 @@ template: overrides/main.html
 
 ## Material for MkDocs
 
+### 6.1.2 <small>_ October 31, 2020</small>
+
+* Fixed sizing of icons in Admonition, Tasklist, etc. (6.1.1 regression)
+
+### 6.1.1 <small>_ October 31, 2020</small>
+
+* Fixed #2019: Page title not correctly updated when using instant loading
+
+### 6.1.0 <small>_ October 17, 2020</small>
+
+* Fixed #1973: Added support for printing in dark mode
+* Fixed #1974: Added support for printing content tabs
+* Fixed #1995: Improved customizability of details extension
+
+### 6.0.2 <small>_ October 4, 2020</small>
+
+* Added Georgian translations
+* Added escaping for link `title` attributes where necessary
+* Fixed #1956: Pages with whitespace in names have invalid links in search
+* Removed unnecessary (duplicated) link `title` attributes
+
+### 6.0.1 <small>_ September 26, 2020</small>
+
+* Fixed stemmer support for `file://` protocol through `iframe-worker`
+* Fixed details marker showing for search result in Firefox
+* Fixed tabbing behavior when search query is not empty
+* Switched TypeScript compilation target to ES2015
+* Reduced size of JavaScript by 30% (`176kb` → `124kb`)
+* Removed `mkdocs` and `readthedocs` themes from Docker image
+
+### 6.0.0 <small>_ September 25, 2020</small>
+
+* Improved search result look and feel
+* Improved search result stability while typing
+* Improved search result grouping (pages + headings)
+* Improved search result relevance and scoring
+* Added display of missing query terms to search results
+* Reduced size of vendor bundle by 25% (`84kb` → `67kb`)
+* Reduced size of the Docker image to improve CI build performance
+* Removed hero partial in favor of custom implementation
+* Removed deprecated front matter features
+
+### 5.5.14 <small>_ September 23, 2020</small>
+
+* Improved spacing around image captions
+* Fixed #1939: Long tables cause header overlap in print view
+
+### 5.5.13 <small>_ September 19, 2020</small>
+
+* Improved abbreviations on touch devices
+
+### 5.5.12 <small>_ August 31, 2020</small>
+
+* Fixed #1638: occasional `404` for images when using instant loading
+
 ### 5.5.11 <small>_ August 28, 2020</small>
 
-  * Fixed Disqus integration, as the minifier killed the config
+* Fixed Disqus integration, as the minifier killed the config
 
 ### 5.5.10 <small>_ August 28, 2020</small>
 

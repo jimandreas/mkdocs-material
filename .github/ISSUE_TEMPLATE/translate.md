@@ -8,7 +8,7 @@ assignees: ''
 
 ## Instructions
 
-1. Check, if your language is already available: [here](https://bit.ly/3c2ox0C)
+1. Check, if your language is already available: [here](https://bit.ly/33vFDD0)
 2. If it isn't, please translate the labels on the right:
 
 ``` jinja
@@ -34,6 +34,8 @@ assignees: ''
   "search.result.none": "No matching documents",
   "search.result.one": "1 matching document",
   "search.result.other": "# matching documents",
+  "search.result.more.one": "1 more on this page",
+  "search.result.more.other": "# more on this page",
   "skip.link.title": "Skip to content",
   "source.link.title": "Go to repository",
   "source.revision.date": "Last update",
@@ -42,4 +44,4 @@ assignees: ''
 }[key] }}{% endmacro %}
 ```
 
-Thanks!
+<!-- Thanks you! You've made Material for MkDocs even better! -->
