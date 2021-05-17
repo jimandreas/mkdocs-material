@@ -23,8 +23,9 @@
 # -----------------------------------------------------------------------------
 
 #HACK
-.idea
-build
+/.idea
+/.idea/workspace.xml
+/build
 
 # Dependencies
 /node_modules
