@@ -28,7 +28,7 @@
 #  4) Press "Shift-F5" to reload the browser and see your changes (Chrome).
 
 REPO="https://github.com/jimandreas/mkdocs-material"
-DIR=build/temp-$$
+DIR=../../build/temp-$$
 
 if [ ! -f build_and_upload_docs.sh ]; then
    echo "this script must be run from the docs dir"
