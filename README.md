@@ -1,6 +1,6 @@
 <p align="center">
-  <a href="https://squidfunk.github.io/mkdocs-material/">
-    <img src="https://raw.githubusercontent.com/squidfunk/mkdocs-material/master/.github/assets/logo.svg" width="320" alt="Material for MkDocs">
+  <a href="https://jimandreas.github.io/mkdocs-material/">
+    <img src="https://raw.githubusercontent.com/jimandreas/mkdocs-material/master/.github/assets/logo.svg" width="320" alt="Material for MkDocs">
   </a>
 </p>
 
@@ -14,40 +14,40 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/squidfunk/mkdocs-material/actions"><img
-    src="https://github.com/squidfunk/mkdocs-material/workflows/build/badge.svg?branch=master"
+  <a href="https://github.com/jimandreas/mkdocs-material/actions"><img
+    src="https://github.com/jimandreas/mkdocs-material/workflows/build/badge.svg?branch=master"
     alt="Build"
   /></a>
   <a href="https://pypistats.org/packages/mkdocs-material"><img
     src="https://img.shields.io/pypi/dm/mkdocs-material.svg" 
     alt="Downloads"
   /></a>
-  <a href="https://gitter.im/squidfunk/mkdocs-material"><img 
-    src="https://badges.gitter.im/squidfunk/mkdocs-material.svg" 
+  <a href="https://gitter.im/jimandreas/mkdocs-material"><img 
+    src="https://badges.gitter.im/jimandreas/mkdocs-material.svg" 
     alt="Chat on Gitter"
   /></a>
   <a href="https://pypi.org/project/mkdocs-material"><img 
     src="https://img.shields.io/pypi/v/mkdocs-material.svg" 
     alt="Python Package Index"
   /></a>
-  <a href="https://hub.docker.com/r/squidfunk/mkdocs-material/"><img 
-    src="https://img.shields.io/docker/pulls/squidfunk/mkdocs-material" 
+  <a href="https://hub.docker.com/r/jimandreas/mkdocs-material/"><img 
+    src="https://img.shields.io/docker/pulls/jimandreas/mkdocs-material" 
     alt="Docker Pulls"
   /></a>
-  <a href="https://squidfunk.github.io/mkdocs-material/insiders/"><img
+  <a href="https://jimandreas.github.io/mkdocs-material/insiders/"><img
     src="https://img.shields.io/static/v1?label=%E2%86%92&message=insiders&color=e91e63"
   /></a>
 </p>
 
 <p align="center">
-  Create a branded static site from a set of Markdown files to host the
+  JIMS FORK - Create a branded static site from a set of Markdown files to host the
   documentation of your Open Source or commercial project – customizable,
   searchable, mobile-friendly, 40+ languages. Set up in 5 minutes.
 </p>
 
 <p align="center">
-  <a href="https://squidfunk.github.io/mkdocs-material/getting-started/">
-    <img src="https://raw.githubusercontent.com/squidfunk/mkdocs-material/master/.github/assets/screenshot.png" width="700" />
+  <a href="https://jimandreas.github.io/mkdocs-material/getting-started/">
+    <img src="https://raw.githubusercontent.com/jimandreas/mkdocs-material/master/.github/assets/screenshot.png" width="700" />
   </a>
 </p>
 
@@ -55,8 +55,8 @@
   <em>
     A demo is worth a thousand words — check it out at
     <a
-      href="https://squidfunk.github.io/mkdocs-material/"
-    >squidfunk.github.io/mkdocs-material</a>.
+      href="https://jimandreas.github.io/mkdocs-material/"
+    >jimandreas.github.io/mkdocs-material</a>.
   </em>
 </p>
 
@@ -99,10 +99,10 @@ that new features are first exclusively released to sponsors as part of Material
 for MkDocs Insiders. Read on to learn [how sponsorship works][4], and how you
 can [become a sponsor][5]._
 
-  [2]: https://squidfunk.github.io/mkdocs-material/reference/icons-emojis/#search
+  [2]: https://jimandreas.github.io/mkdocs-material/reference/icons-emojis/#search
   [3]: https://github.com/sponsorware/docs
-  [4]: https://squidfunk.github.io/mkdocs-material/insiders/#how-sponsorship-works
-  [5]: https://squidfunk.github.io/mkdocs-material/insiders/#how-to-become-a-sponsor
+  [4]: https://jimandreas.github.io/mkdocs-material/insiders/#how-sponsorship-works
+  [5]: https://jimandreas.github.io/mkdocs-material/insiders/#how-to-become-a-sponsor
 
 ## Quick start
 
@@ -120,18 +120,18 @@ theme:
 ```
 
 For other installation methods, configuration options, and a demo, visit
-[squidfunk.github.io/mkdocs-material][1]
+[jimandreas.github.io/mkdocs-material][1]
 
-  [1]: https://squidfunk.github.io/mkdocs-material/
+  [1]: https://jimandreas.github.io/mkdocs-material/
 
 ## Premium Sponsors
 
 <p>
   <a href="https://docs.baslerweb.com/" target=_blank><img
-    src="https://raw.githubusercontent.com/squidfunk/mkdocs-material/master/.github/assets/sponsors/basler.png" width="155"
+    src="https://raw.githubusercontent.com/jimandreas/mkdocs-material/master/.github/assets/sponsors/basler.png" width="155"
   /></a>
   <a href="https://cirrus-ci.org/" target=_blank><img
-    src="https://raw.githubusercontent.com/squidfunk/mkdocs-material/master/.github/assets/sponsors/cirrus-ci.svg" width="155"
+    src="https://raw.githubusercontent.com/jimandreas/mkdocs-material/master/.github/assets/sponsors/cirrus-ci.svg" width="155"
   /></a>
 </p>
 
