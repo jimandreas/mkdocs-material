@@ -19,7 +19,7 @@ or another destination should be used.
 :octicons-milestone-24: Default: [`Roboto`][3]
 
 The _regular font_ is used for all body copy, headlines, and essentially
-everything that does not need to be proportionally spaced. It can be set to any
+everything that does not need to be monospaced. It can be set to any
 valid [Google Font][1] with:
 
 ``` yaml
@@ -30,15 +30,15 @@ theme:
 
 The typeface will be loaded in 300, 400, _400i_ and __700__.
 
-  [2]: https://github.com/squidfunk/mkdocs-material/blob/master/src/base.html#L100-L125
+  [2]: https://github.com/squidfunk/mkdocs-material/blob/master/src/base.html
   [3]: https://fonts.google.com/specimen/Roboto
 
-### Proportional font
+### Monospaced font
 
 [:octicons-file-code-24: Source][2] ·
 :octicons-milestone-24: Default: [`Roboto Mono`][4]
 
-The _proportional font_ is used for code blocks and can be configured separately.
+The _monospaced font_ is used for code blocks and can be configured separately.
 Just like the regular font, it can be set to any valid [Google Font][1] via
 `mkdocs.yml` with:
 
@@ -88,25 +88,26 @@ corresponding `@font-face` definition:
 ```
 
 The font can then be applied to specific elements, e.g. only headlines, or 
-globally to be used as the site-wide regular or proportional font:
+globally to be used as the site-wide regular or monospaced font (with fallback
+fonts being added automatically):
 
 === "Regular font"
 
     ``` css
-    body, input {
-      font-family: "<font>", -apple-system, Helvetica, Arial, sans-serif;
+    :root {
+      --md-text-font-family: "<font>";
     }
     ```
 
-=== "Proportional font"
+=== "Monospaced font"
 
     ``` css
-    pre, code, kbd {
-      font-family: "<font>", SFMono-Regular, Consolas, Menlo, monospace;
+    :root {
+      --md-code-font-family: "<font>";
     }
     ```
 
   [5]: ../data-privacy.md
   [6]: ../customization.md#extending-the-theme
-  [7]: ../customization.md#overriding-blocks
+  [7]: ../customization.md#overriding-blocks-recommended
   [8]: ../customization.md#additional-stylesheets

@@ -34,16 +34,16 @@ the selected [primary color][3].
 _Example_:
 
 ``` markdown
-[Subscribe to our mailing list](#){: .md-button }
+[Subscribe to our mailing list](#){ .md-button }
 ```
 
 _Result_:
 
-[Subscribe to our mailing list][4]{: .md-button }
+[Subscribe to our mailing list][4]{ .md-button }
 
   [2]: #attribute-list
   [3]: ../setup/changing-the-colors.md#primary-color
-  [4]: javascript:app.dialog$.next("Done!")
+  [4]: javascript:alert$.next("Done!")
 
 ### Adding primary buttons
 
@@ -54,12 +54,12 @@ CSS classes.
 _Example_:
 
 ``` markdown
-[Subscribe to our mailing list](#){: .md-button .md-button--primary }
+[Subscribe to our mailing list](#){ .md-button .md-button--primary }
 ```
 
 _Result_:
 
-[Subscribe to our mailing list][4]{: .md-button .md-button--primary }
+[Subscribe to our mailing list][4]{ .md-button .md-button--primary }
 
   [5]: ../index.md
 
@@ -72,12 +72,12 @@ theme][7].
 _Example_:
 
 ``` markdown
-[Submit :fontawesome-solid-paper-plane:](#){: .md-button .md-button--primary }
+[Submit :fontawesome-solid-paper-plane:](#){ .md-button .md-button--primary }
 ```
 
 _Result_:
 
-[Submit :fontawesome-solid-paper-plane:][4]{: .md-button .md-button--primary }
+[Submit :fontawesome-solid-paper-plane:][4]{ .md-button .md-button--primary }
 
   [6]: icons-emojis.md#using-icons
-  [7]: https://github.com/squidfunk/mkdocs-material/tree/master/material/.icons
+  [7]: icons-emojis.md#search

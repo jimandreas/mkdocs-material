@@ -1,5 +1,5 @@
 ////
-/// Copyright (c) 2016-2020 Martin Donath <martin.donath@squidfunk.com>
+/// Copyright (c) 2016-2021 Martin Donath <martin.donath@squidfunk.com>
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a
 /// copy of this software and associated documentation files (the "Software"),
@@ -24,47 +24,54 @@
 // Rules
 // ----------------------------------------------------------------------------
 
-// Application footer
+// Footer
 .md-footer {
   color: var(--md-footer-fg-color);
   background-color: var(--md-footer-bg-color);
 
-  // Hide for print
+  // [print]: Hide footer
   @media print {
     display: none;
   }
-}
 
-// Navigation within footer
-.md-footer-nav {
-
-  // Set spacing
+  // Footer wrapper
   &__inner {
     padding: px2rem(4px);
     overflow: auto;
   }
 
-  // Links to previous and next page
+  // Footer link to previous and next page
   &__link {
     display: flex;
     padding-top: px2rem(28px);
     padding-bottom: px2rem(8px);
+    outline-color: var(--md-accent-fg-color);
     transition: opacity 250ms;
 
-    // [tablet +]: Set proportional width
+    // [tablet +]: Adjust width to 50/50
     @include break-from-device(tablet) {
       width: 50%;
     }
 
-    // Focused or hovered links
+    // Footer link on focus/hover
     &:focus,
     &:hover {
       opacity: 0.7;
     }
 
-    // Link to previous page
+    // Footer link to previous page
     &--prev {
       float: left;
+
+      // [mobile -]: Adjust width to 25/75 and hide title
+      @include break-to-device(mobile) {
+        width: 25%;
+
+        // Hide footer title
+        .md-footer__title {
+          display: none;
+        }
+      }
 
       // Adjust for right-to-left languages
       [dir="rtl"] & {
@@ -75,22 +82,17 @@
           transform: scaleX(-1);
         }
       }
-
-      // [mobile -]: Hide title for previous page
-      @include break-to-device(mobile) {
-        width: 25%;
-
-        // Title
-        .md-footer-nav__title {
-          display: none;
-        }
-      }
     }
 
-    // Link to next page
+    // Footer link to next page
     &--next {
       float: right;
       text-align: right;
+
+      // [mobile -]: Adjust width to 25/75
+      @include break-to-device(mobile) {
+        width: 75%;
+      }
 
       // Adjust for right-to-left languages
       [dir="rtl"] & {
@@ -102,15 +104,10 @@
           transform: scaleX(-1);
         }
       }
-
-      // [mobile -]: Hide title for previous page
-      @include break-to-device(mobile) {
-        width: 75%;
-      }
     }
   }
 
-  // Link title - set line height to match icon for correct alignment
+  // Footer title
   &__title {
     position: relative;
     flex-grow: 1;
@@ -120,13 +117,13 @@
     line-height: px2rem(48px);
   }
 
-  // Link button
+  // Footer link button
   &__button {
     margin: px2rem(4px);
     padding: px2rem(8px);
   }
 
-  // Link direction
+  // Footer link direction (i.e. prev and next)
   &__direction {
     position: absolute;
     right: 0;
@@ -138,11 +135,11 @@
   }
 }
 
-// Non-navigational information
+// Footer metadata
 .md-footer-meta {
   background-color: var(--md-footer-bg-color--dark);
 
-  // Set spacing
+  // Footer metadata wrapper
   &__inner {
     display: flex;
     flex-wrap: wrap;
@@ -150,11 +147,11 @@
     padding: px2rem(4px);
   }
 
-  // Use a decent color for non-hovered links and ensure specificity
+  // Lighten color for non-hovered text links
   html &.md-typeset a {
     color: var(--md-footer-fg-color--light);
 
-    // Focused or hovered link
+    // Text link on focus/hover
     &:focus,
     &:hover {
       color: var(--md-footer-fg-color);
@@ -162,7 +159,7 @@
   }
 }
 
-// Copyright and theme information
+// Footer copyright and theme information
 .md-footer-copyright {
   width: 100%;
   margin: auto px2rem(12px);
@@ -170,28 +167,29 @@
   color: var(--md-footer-fg-color--lighter);
   font-size: px2rem(12.8px);
 
-  // [tablet portrait +]: Show next to social media links
+  // [tablet portrait +]: Show copyright and social links in one line
   @include break-from-device(tablet portrait) {
     width: auto;
   }
 
-  // Highlight copyright information
+  // Footer copyright highlight - this is the upper part of the copyright and
+  // theme information, which will include a darker color than the theme link
   &__highlight {
     color: var(--md-footer-fg-color--light);
   }
 }
 
-// Social links
+// Footer social links
 .md-footer-social {
   margin: 0 px2rem(8px);
   padding: px2rem(4px) 0 px2rem(12px);
 
-  // [tablet portrait +]: Show next to copyright information
+  // [tablet portrait +]: Show copyright and social links in one line
   @include break-from-device(tablet portrait) {
     padding: px2rem(12px) 0;
   }
 
-  // Link with icon
+  // Footer social link
   &__link {
     display: inline-block;
     width: px2rem(32px);
@@ -203,7 +201,7 @@
       line-height: 1.9;
     }
 
-    // Social icon
+    // Fill icon with current color
     svg {
       max-height: px2rem(16px);
       vertical-align: -25%;

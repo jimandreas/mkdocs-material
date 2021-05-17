@@ -1,5 +1,5 @@
 <!--
-  Copyright (c) 2016-2020 Martin Donath <martin.donath@squidfunk.com>
+  Copyright (c) 2016-2021 Martin Donath <martin.donath@squidfunk.com>
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to
@@ -30,7 +30,7 @@
 {% if not page.is_homepage and disqus %}
   <h2 id="__comments">{{ lang.t("meta.comments") }}</h2>
   <div id="disqus_thread"></div>
-  <script type="application/javascript">
+  <script>
     var disqus_config = function () {
       this.page.url = "{{ page.canonical_url }}";
       this.page.identifier =

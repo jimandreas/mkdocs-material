@@ -1,5 +1,5 @@
 ////
-/// Copyright (c) 2016-2020 Martin Donath <martin.donath@squidfunk.com>
+/// Copyright (c) 2016-2021 Martin Donath <martin.donath@squidfunk.com>
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a
 /// copy of this software and associated documentation files (the "Software"),
@@ -19,8 +19,6 @@
 /// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 /// DEALINGS
 ////
-
-// stylelint-disable no-duplicate-selectors
 
 // ----------------------------------------------------------------------------
 // Rules
@@ -45,12 +43,6 @@ body {
   margin: 0;
 }
 
-// Reset horizontal rules in FF
-hr {
-  box-sizing: content-box;
-  overflow: visible;
-}
-
 // Reset tap outlines on iOS and Android
 a,
 button,
@@ -65,6 +57,16 @@ a {
   text-decoration: none;
 }
 
+// Normalize horizontal separator styles
+hr {
+  display: block;
+  box-sizing: content-box;
+  height: px2rem(1px);
+  padding: 0;
+  overflow: visible;
+  border: 0;
+}
+
 // Normalize font-size in all browsers
 small {
   font-size: 80%;
@@ -76,7 +78,7 @@ sup {
   line-height: 1em;
 }
 
-// Remove borders on images
+// Remove border on image
 img {
   border-style: none;
 }
@@ -90,7 +92,7 @@ table {
 // Reset table cell styles
 td,
 th {
-  font-weight: normal; // stylelint-disable-line
+  font-weight: 400;
   vertical-align: top;
 }
 
@@ -99,6 +101,7 @@ button {
   margin: 0;
   padding: 0;
   font-size: inherit;
+  font-family: inherit;
   background: transparent;
   border: 0;
 }

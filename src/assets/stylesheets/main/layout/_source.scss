@@ -1,5 +1,5 @@
 ////
-/// Copyright (c) 2016-2020 Martin Donath <martin.donath@squidfunk.com>
+/// Copyright (c) 2016-2021 Martin Donath <martin.donath@squidfunk.com>
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a
 /// copy of this software and associated documentation files (the "Software"),
@@ -24,7 +24,7 @@
 // Keyframes
 // ----------------------------------------------------------------------------
 
-// Show source facts
+// Show repository facts
 @keyframes md-source__facts--done {
   0% {
     height: 0;
@@ -35,7 +35,7 @@
   }
 }
 
-// Show source fact
+// Show repository fact
 @keyframes md-source__fact--done {
   0% {
     transform: translateY(100%);
@@ -56,25 +56,36 @@
 // Rules
 // ----------------------------------------------------------------------------
 
-// Source container
+// Icon definitions
+:root {
+  --md-source-forks-icon: svg-load("octicons/repo-forked-16.svg");
+  --md-source-repositories-icon: svg-load("octicons/repo-16.svg");
+  --md-source-stars-icon: svg-load("octicons/star-16.svg");
+  --md-source-version-icon: svg-load("octicons/tag-16.svg");
+}
+
+// ----------------------------------------------------------------------------
+
+// Repository information
 .md-source {
   display: block;
   font-size: px2rem(13px);
   line-height: 1.2;
   white-space: nowrap;
-  // Hack: reduce jitter
+  outline-color: var(--md-accent-fg-color);
+  // Hack: promote to own layer to reduce jitter
   backface-visibility: hidden;
   transition: opacity 250ms;
 
-  // Hovered source container
+  // Repository information on hover
   &:hover {
     opacity: 0.7;
   }
 
-  // Repository platform icon
+  // Repository icon
   &__icon {
     display: inline-block;
-    width: px2rem(48px);
+    width: px2rem(40px);
     height: px2rem(48px);
     vertical-align: middle;
 
@@ -90,7 +101,7 @@
       }
     }
 
-    // Correct alignment, if icon is present
+    // Adjust spacing if icon is present
     + .md-source__repository {
       margin-left: px2rem(-40px);
       padding-left: px2rem(40px);
@@ -111,17 +122,15 @@
     max-width: calc(100% - #{px2rem(24px)});
     margin-left: px2rem(12px);
     overflow: hidden;
-    font-weight: 700;
     text-overflow: ellipsis;
     vertical-align: middle;
   }
 
-  // Source facts (statistics etc.)
+  // Repository facts
   &__facts {
-    margin: 0;
+    margin: px2rem(2px) 0 0;
     padding: 0;
     overflow: hidden;
-    font-weight: 700;
     font-size: px2rem(11px);
     list-style-type: none;
     opacity: 0.75;
@@ -132,29 +141,63 @@
     }
   }
 
-  // Fact
+  // Repository fact
   &__fact {
-    float: left;
-
-    // Adjust for right-to-left languages
-    [dir="rtl"] & {
-      float: right;
-    }
+    display: inline-block;
 
     // Show after the data was loaded
     [data-md-state="done"] & {
       animation: md-source__fact--done 400ms ease-out;
     }
 
-    // Middle dot before fact
+    // Repository fact icon
     &::before {
-      margin: 0 px2rem(2px);
-      content: "\00B7";
+      display: inline-block;
+      width: px2rem(12px);
+      height: px2rem(12px);
+      margin-right: px2rem(2px);
+      vertical-align: text-top;
+      background-color: currentColor;
+      mask-repeat: no-repeat;
+      mask-size: contain;
+      content: "";
     }
 
-    // Remove middle dot on first fact
-    &:first-child::before {
-      display: none;
+    // Adjust spacing for repository fact icon
+    &:nth-child(1n+2)::before {
+      margin-left: px2rem(8px);
+    }
+
+    // Adjust for right-to-left languages
+    [dir="rtl"] & {
+      margin-right: initial;
+      margin-left: px2rem(2px);
+
+      // Adjust spacing for repository fact icon
+      &:nth-child(1n+2)::before {
+        margin-right: px2rem(8px);
+        margin-left: initial;
+      }
+    }
+
+    // Repository fact: version
+    &--version::before {
+      mask-image: var(--md-source-version-icon);
+    }
+
+    // Repository fact: stars
+    &--stars::before {
+      mask-image: var(--md-source-stars-icon);
+    }
+
+    // Repository fact: forks
+    &--forks::before {
+      mask-image: var(--md-source-forks-icon);
+    }
+
+    // Repository fact: repositories
+    &--repositories::before {
+      mask-image: var(--md-source-repositories-icon);
     }
   }
 }

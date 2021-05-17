@@ -98,19 +98,21 @@ templates can be shared among multiple pages:
 
     ``` markdown
     ---
-    template: overrides/hero.html
+    template: hero.html
     ---
     ```
 
 === "Template"
 
     ``` html
+    {% extends "base.html" %}
+
     {% block hero %}
       <!-- Add custom hero here -->
     {% endblock %}
     ```
 
-  [5]: customization.md#overriding-blocks
+  [5]: customization.md#overriding-blocks-recommended
   [6]: customization.md#extending-the-theme
 
 ## Docker image

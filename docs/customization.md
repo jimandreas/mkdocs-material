@@ -112,7 +112,7 @@ The directory layout of the theme is as follows:
 │  ├─ integrations/                    # Third-party integrations
 │  │  ├─ analytics.html                # - Google Analytics
 │  │  └─ disqus.html                   # - Disqus
-│  ├─ language/                        # Localized languages
+│  ├─ languages/                       # Localized languages
 │  ├─ footer.html                      # Footer bar
 │  ├─ header.html                      # Header bar
 │  ├─ language.html                    # Localized labels
@@ -137,7 +137,7 @@ The directory layout of the theme is as follows:
 ### Overriding partials
 
 In order to override a partial, we can replace it with a file of the same name
-and location in the `overrides` directory. For example. to replace the original
+and location in the `overrides` directory. For example, to replace the original
 `footer.html`, create a `footer.html` file in the `overrides/partials`
 directory:
 
@@ -152,7 +152,7 @@ directory:
 MkDocs will now use the new partial when rendering the theme. This can be done
 with any file.
 
-### Overriding blocks
+### Overriding blocks <small>recommended</small> { data-toc-label="Overiding blocks" }
 
 Besides overriding partials, it's also possible to override (and extend)
 _template blocks_, which are defined inside the templates and wrap specific
@@ -178,46 +178,76 @@ Then, e.g. to override the site title, add the following line to `main.html`:
 
 Material for MkDocs provides the following template blocks:
 
-| Block name   | Wrapped contents                                |
-| ------------ | ----------------------------------------------- |
-| `analytics`  | Wraps the Google Analytics integration          |
-| `announce`   | Wraps the announcement bar                      |
-| `config`     | Wraps the JavaScript application config         |
-| `content`    | Wraps the main content                          |
-| `disqus`     | Wraps the Disqus integration                    |
-| `extrahead`  | Empty block to add custom meta tags             |
-| `fonts`      | Wraps the font definitions                      |
-| `footer`     | Wraps the footer with navigation and copyright  |
-| `header`     | Wraps the fixed header bar                      |
-| `hero`       | Wraps the hero teaser (if available)            |
-| `htmltitle`  | Wraps the `<title>` tag                         |
-| `libs`       | Wraps the JavaScript libraries (header)         |
-| `scripts`    | Wraps the JavaScript application (footer)       |
-| `source`     | Wraps the linked source files                   |
-| `site_meta`  | Wraps the meta tags in the document head        |
-| `site_nav`   | Wraps the site navigation and table of contents |
-| `styles`     | Wraps the stylesheets (also extra sources)      |
-| `tabs`       | Wraps the tabs navigation (if available)        |
+| Block name        | Purpose                                         |
+|:------------------|:------------------------------------------------|
+| `analytics`       | Wraps the Google Analytics integration          |
+| `announce`        | Wraps the announcement bar                      |
+| `config`          | Wraps the JavaScript application config         |
+| `content`         | Wraps the main content                          |
+| `disqus`          | Wraps the Disqus integration                    |
+| `extrahead`       | Empty block to add custom meta tags             |
+| `fonts`           | Wraps the font definitions                      |
+| `footer`          | Wraps the footer with navigation and copyright  |
+| `header`          | Wraps the fixed header bar                      |
+| `hero`            | Wraps the hero teaser (if available)            |
+| `htmltitle`       | Wraps the `<title>` tag                         |
+| `libs`            | Wraps the JavaScript libraries (header)         |
+| `outdated`        | Wraps the version warning                       |
+| `scripts`         | Wraps the JavaScript application (footer)       |
+| `source`          | Wraps the linked source files                   |
+| `site_meta`       | Wraps the meta tags in the document head        |
+| `site_nav`        | Wraps the site navigation and table of contents |
+| `styles`          | Wraps the stylesheets (also extra sources)      |
+| `tabs`            | Wraps the tabs navigation (if available)        |
 
 For more on this topic refer to the [MkDocs documentation][5].
 
-  [5]: https://www.mkdocs.org/user-guide/styling-your-docs/#overriding-template-blocks
+[5]: https://www.mkdocs.org/user-guide/styling-your-docs/#overriding-template-blocks
+
+#### Additional variables
+
+Besides template blocks, Material for MkDocs provides extra variables for parts
+that cannot be overridden with template blocks (due to technical limitations of
+the template engine). If you want to add further information after the _Made
+with Material for MkDocs_ hint in the footer, add the following line to
+`main.html`:
+
+``` html
+{% extends "base.html" %}
+
+{% set extracopyright %}
+  <!-- Add your additional information here -->
+{% endset %}
+```
+
+Material for MkDocs provides the following additional variables:
+
+| Block name        | Purpose                                         |
+|:------------------|:------------------------------------------------|
+| `extracopyright`  | Adds custom copyright information               |
 
 ## Theme development
 
-Material for MkDocs uses [Webpack][6] as a build tool to leverage modern web
-technologies like [TypeScript][7] and [SASS][8]. If you want to make more
-fundamental changes, it may be necessary to make the adjustments directly in
-the source of the theme and recompile it.
+Material for MkDocs is built on top of [TypeScript][6], [RxJS][7] and [SASS][8],
+and uses a lean, custom build process to put everything together.[^1] If you
+want to make more fundamental changes, it may be necessary to make the
+adjustments directly in the source of the theme and recompile it.
 
-  [6]: https://webpack.js.org/
-  [7]: https://www.typescriptlang.org/
+  [^1]:
+    Prior to version 7.0, the build was based on Webpack. This led to broken
+    builds due to frequent incompatibilities with loaders and plugins, so we
+    decided to swap Webpack for a leaner custom solution which is now based on
+    [RxJS][7] as the application itself. This enabled us to remove more than
+    500 dependencies (~30% less).
+
+  [6]: https://www.typescriptlang.org/
+  [7]: https://github.com/ReactiveX/rxjs
   [8]: https://sass-lang.com
 
 ### Environment setup
 
 In order to start development on Material for MkDocs, a [Node.js][9] version of
-at least 12 is required. First, clone the repository:
+at least 14 is required. First, clone the repository:
 
 ``` sh
 git clone https://github.com/jimandreas/mkdocs-material
@@ -229,6 +259,7 @@ Next, all dependencies need to be installed, which is done with:
 cd mkdocs-material
 pip install -r requirements.txt
 pip install mkdocs-minify-plugin
+pip install mkdocs-redirects
 npm install
 ```
 
@@ -236,13 +267,13 @@ npm install
 
 ### Development mode
 
-Start the Webpack watchdog with:
+Start the watcher with:
 
 ```
 npm start
 ```
 
-Then, in a second session, start the MkDocs server with:
+Then, in a second session, start the MkDocs live preview server with:
 
 ```
 mkdocs serve

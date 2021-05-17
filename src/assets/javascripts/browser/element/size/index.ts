@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-2020 Martin Donath <martin.donath@squidfunk.com>
+ * Copyright (c) 2016-2021 Martin Donath <martin.donath@squidfunk.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -20,13 +20,11 @@
  * IN THE SOFTWARE.
  */
 
-import ResizeObserver from "resize-observer-polyfill"
 import {
   NEVER,
   Observable,
   Subject,
   defer,
-  merge,
   of
 } from "rxjs"
 import {
@@ -77,12 +75,12 @@ const observer$ = defer(() => of(
   })
 ))
   .pipe(
-    switchMap(resize => merge(of(resize), NEVER)
+    switchMap(resize => NEVER.pipe(startWith(resize))
       .pipe(
         finalize(() => resize.disconnect())
       )
     ),
-    shareReplay({ bufferSize: 1, refCount: true })
+    shareReplay(1)
   )
 
 /* ----------------------------------------------------------------------------
@@ -94,7 +92,7 @@ const observer$ = defer(() => of(
  *
  * @param el - Element
  *
- * @return Element size
+ * @returns Element size
  */
 export function getElementSize(el: HTMLElement): ElementSize {
   return {
@@ -103,19 +101,40 @@ export function getElementSize(el: HTMLElement): ElementSize {
   }
 }
 
+/**
+ * Retrieve element content size, i.e. including overflowing content
+ *
+ * @param el - Element
+ *
+ * @returns Element size
+ */
+export function getElementContentSize(el: HTMLElement): ElementSize {
+  return {
+    width:  el.scrollWidth,
+    height: el.scrollHeight
+  }
+}
+
 /* ------------------------------------------------------------------------- */
 
 /**
  * Watch element size
  *
- * This function returns an observable that will subscribe to a single internal
+ * This function returns an observable that subscribes to a single internal
  * instance of `ResizeObserver` upon subscription, and emit resize events until
  * termination. Note that this function should not be called with the same
  * element twice, as the first unsubscription will terminate observation.
  *
+ * Sadly, we can't use the `DOMRect` objects returned by the observer, because
+ * we need the emitted values to be consistent with `getElementSize`, which will
+ * return the used values (rounded) and not actual values (unrounded). Thus, we
+ * use the `offset*` properties. See the linked GitHub issue.
+ *
+ * @see https://bit.ly/3m0k3he - GitHub issue
+ *
  * @param el - Element
  *
- * @return Element size observable
+ * @returns Element size observable
  */
 export function watchElementSize(
   el: HTMLElement
@@ -127,10 +146,7 @@ export function watchElementSize(
         .pipe(
           filter(({ target }) => target === el),
           finalize(() => observer.unobserve(el)),
-          map(({ contentRect }) => ({
-            width:  contentRect.width,
-            height: contentRect.height
-          }))
+          map(() => getElementSize(el))
         )
       ),
       startWith(getElementSize(el))

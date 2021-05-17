@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-2020 Martin Donath <martin.donath@squidfunk.com>
+ * Copyright (c) 2016-2021 Martin Donath <martin.donath@squidfunk.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -20,27 +20,27 @@
  * IN THE SOFTWARE.
  */
 
-import { SourceFacts } from "patches/source"
-import { h } from "utilities"
+import { SourceFacts } from "~/components"
+import { h, round } from "~/utilities"
 
 /* ----------------------------------------------------------------------------
  * Functions
  * ------------------------------------------------------------------------- */
 
 /**
- * Render source facts
+ * Render repository facts
  *
- * @param facts - Source facts
+ * @param facts - Repository facts
  *
- * @return Element
+ * @returns Element
  */
-export function renderSource(
-  facts: SourceFacts
-) {
+export function renderSourceFacts(facts: SourceFacts): HTMLElement {
   return (
     <ul class="md-source__facts">
-      {facts.map(fact => (
-        <li class="md-source__fact">{fact}</li>
+      {Object.entries(facts).map(([key, value]) => (
+        <li class={`md-source__fact md-source__fact--${key}`}>
+          {typeof value === "number" ? round(value) : value}
+        </li>
       ))}
     </ul>
   )

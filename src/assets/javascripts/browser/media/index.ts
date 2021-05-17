@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-2020 Martin Donath <martin.donath@squidfunk.com>
+ * Copyright (c) 2016-2021 Martin Donath <martin.donath@squidfunk.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -20,8 +20,17 @@
  * IN THE SOFTWARE.
  */
 
-import { Observable } from "rxjs"
-import { shareReplay, startWith } from "rxjs/operators"
+import {
+  NEVER,
+  Observable,
+  fromEvent,
+  fromEventPattern
+} from "rxjs"
+import {
+  mapTo,
+  startWith,
+  switchMap
+} from "rxjs/operators"
 
 /* ----------------------------------------------------------------------------
  * Functions
@@ -30,17 +39,54 @@ import { shareReplay, startWith } from "rxjs/operators"
 /**
  * Watch media query
  *
+ * Note that although `MediaQueryList.addListener` is deprecated we have to
+ * use it, because it's the only way to ensure proper downward compatibility.
+ *
+ * @see https://bit.ly/3dUBH2m - GitHub issue
+ *
  * @param query - Media query
  *
- * @return Media observable
+ * @returns Media observable
  */
 export function watchMedia(query: string): Observable<boolean> {
   const media = matchMedia(query)
-  return new Observable<boolean>(subscriber => {
-    media.addListener(ev => subscriber.next(ev.matches))
-  })
+  return fromEventPattern<boolean>(next => (
+    media.addListener(() => next(media.matches))
+  ))
     .pipe(
-      startWith(media.matches),
-      shareReplay({ bufferSize: 1, refCount: true })
+      startWith(media.matches)
+    )
+}
+
+/**
+ * Watch print mode, cross-browser
+ *
+ * @returns Print mode observable
+ */
+export function watchPrint(): Observable<void> {
+  return fromEvent(window, "beforeprint")
+    .pipe(
+      mapTo(undefined)
+    )
+}
+
+/* ------------------------------------------------------------------------- */
+
+/**
+ * Toggle an observable with a media observable
+ *
+ * @template T - Data type
+ *
+ * @param query$ - Media observable
+ * @param factory - Observable factory
+ *
+ * @returns Toggled observable
+ */
+export function at<T>(
+  query$: Observable<boolean>, factory: () => Observable<T>
+): Observable<T> {
+  return query$
+    .pipe(
+      switchMap(active => active ? factory() : NEVER)
     )
 }

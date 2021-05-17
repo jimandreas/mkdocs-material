@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-2020 Martin Donath <martin.donath@squidfunk.com>
+ * Copyright (c) 2016-2021 Martin Donath <martin.donath@squidfunk.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -101,9 +101,7 @@ export interface SearchMetadata {
 /**
  * Search result
  */
-export type SearchResult = Array<
-  SearchDocument & SearchMetadata
-> // tslint:disable-line
+export type SearchResult = Array<SearchDocument & SearchMetadata>
 
 /* ----------------------------------------------------------------------------
  * Functions
@@ -115,7 +113,7 @@ export type SearchResult = Array<
  * @param a - 1st list of strings
  * @param b - 2nd list of strings
  *
- * @return Difference
+ * @returns Difference
  */
 function difference(a: string[], b: string[]): string[] {
   const [x, y] = [new Set(a), new Set(b)]
@@ -130,9 +128,6 @@ function difference(a: string[], b: string[]): string[] {
 
 /**
  * Search index
- *
- * Note that `lunr` is injected via Webpack, as it will otherwise also be
- * bundled in the application bundle.
  */
 export class Search {
 
@@ -141,8 +136,8 @@ export class Search {
    *
    * A mapping of URLs (including hash fragments) to the actual articles and
    * sections of the documentation. The search document mapping must be created
-   * regardless of whether the index was prebuilt or not, as `lunr` itself will
-   * only store the actual index.
+   * regardless of whether the index was prebuilt or not, as Lunr.js itself
+   * only stores the actual index.
    */
   protected documents: SearchDocumentMap
 
@@ -152,7 +147,7 @@ export class Search {
   protected highlight: SearchHighlightFactoryFn
 
   /**
-   * The underlying `lunr` search index
+   * The underlying Lunr.js search index
    */
   protected index: lunr.Index
 
@@ -170,7 +165,7 @@ export class Search {
 
     /* If no index was given, create it */
     if (typeof index === "undefined") {
-      this.index = lunr(function() {
+      this.index = lunr(function () {
 
         /* Set up multi-language support */
         if (config.lang.length === 1 && config.lang[0] !== "en") {
@@ -224,7 +219,7 @@ export class Search {
    *
    * @param query - Query value
    *
-   * @return Search results
+   * @returns Search results
    */
   public search(query: string): SearchResult[] {
     if (query) {
@@ -285,7 +280,6 @@ export class Search {
 
       /* Log errors to console (for now) */
       } catch {
-        // tslint:disable-next-line no-console
         console.warn(`Invalid query: ${query} – see https://bit.ly/2s3ChXG`)
       }
     }

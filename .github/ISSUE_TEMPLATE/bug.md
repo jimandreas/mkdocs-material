@@ -2,7 +2,6 @@
 name: Bug
 about: Report a bug
 title: ''
-labels: bug
 assignees: ''
 ---
 
@@ -15,7 +14,9 @@ assignees: ''
   not meet these conditions may be closed unnoticed.
 
   Why? Because the maintainers of this project are wasting a lot of time
-  answering questions that are not directly related to this project.
+  answering questions that are not directly related to this project. If you
+  have a question, please ask your question over in "Discussions", so other
+  users can help you work towards a solution.
 
   Make sure that your request fulfills ALL of the following requirements. If one
   requirement cannot be satisfied, please explain in detail why.
@@ -44,7 +45,7 @@ __I've found a bug and checked that ...__
 
 ### Steps to reproduce the bug
 
-<!-- Please provide the steps to repoduce the issue -->
+<!-- Please provide the steps to reproduce the issue -->
 
 1. ...
 2. ...

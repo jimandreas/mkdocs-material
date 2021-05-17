@@ -1,4 +1,4 @@
-# Copyright (c) 2016-2020 Martin Donath <martin.donath@squidfunk.com>
+# Copyright (c) 2016-2021 Martin Donath <martin.donath@squidfunk.com>
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to
@@ -29,7 +29,7 @@ with open("package.json") as data:
 with open("requirements.txt") as data:
     install_requires = [
         line for line in data.read().split("\n")
-            if line and not line.startswith("#")
+        if line and not line.startswith("#")
     ]
 
 # Load README contents

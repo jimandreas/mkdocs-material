@@ -1,5 +1,5 @@
 ////
-/// Copyright (c) 2016-2020 Martin Donath <martin.donath@squidfunk.com>
+/// Copyright (c) 2016-2021 Martin Donath <martin.donath@squidfunk.com>
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a
 /// copy of this software and associated documentation files (the "Software"),
@@ -43,20 +43,22 @@
 
 @import "main/layout/base";
 @import "main/layout/announce";
-@import "main/layout/button";
 @import "main/layout/clipboard";
 @import "main/layout/content";
 @import "main/layout/dialog";
+@import "main/layout/form";
 @import "main/layout/header";
 @import "main/layout/footer";
 @import "main/layout/nav";
 @import "main/layout/search";
+@import "main/layout/select";
 @import "main/layout/sidebar";
 @import "main/layout/source";
 @import "main/layout/tabs";
+@import "main/layout/top";
+@import "main/layout/version";
 
 @import "main/extensions/markdown/admonition";
-@import "main/extensions/markdown/codehilite";
 @import "main/extensions/markdown/footnotes";
 @import "main/extensions/markdown/toc";
 
@@ -69,4 +71,5 @@
 @import "main/extensions/pymdownx/tabbed";
 @import "main/extensions/pymdownx/tasklist";
 
+@import "main/modifiers";
 @import "main/shame";
